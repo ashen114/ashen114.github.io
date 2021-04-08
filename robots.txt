@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Allow: /hot/
+Allow: /archives/
+Allow: /categories/
+Allow: /tags/
+Allow: /about/
+
+Disallow: /js/
+Disallow: /css/
+Disallow: /lib/
+
+Sitemap: https://ashen114.github.io/sitemap.xml

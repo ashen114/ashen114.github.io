@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+<script>
+// 在github环境下出错，待处理
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Mfs-701ND1wnyMF5ggu23Tkl7PrRR-op_fhel6D0E4I">
+  <meta name="baidu-site-verification" content="V9pGumsldr">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+  <meta name="description" content="踩坑记录 hexo g 报错 报错如下： 12Error: expected end of comment, got end of fileat Object._prettifyError (...@3.2.1@nunjucks\src\lib.js:36:11)     原因：  由于md文档需要转换为html文件，其文档中不允许出来类似的语法   解决方案：  避免md文档中出现类似的语法">
+<meta name="keywords" content="读书笔记,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="博客及主题优化">
+<meta property="og:url" content="http://yoursite.com/hexo博客/20200225-bf65917.html">
+<meta property="og:site_name" content="阿沈是也">
+<meta property="og:description" content="踩坑记录 hexo g 报错 报错如下： 12Error: expected end of comment, got end of fileat Object._prettifyError (...@3.2.1@nunjucks\src\lib.js:36:11)     原因：  由于md文档需要转换为html文件，其文档中不允许出来类似的语法   解决方案：  避免md文档中出现类似的语法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-04-08T03:18:06.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="博客及主题优化">
+<meta name="twitter:description" content="踩坑记录 hexo g 报错 报错如下： 12Error: expected end of comment, got end of fileat Object._prettifyError (...@3.2.1@nunjucks\src\lib.js:36:11)     原因：  由于md文档需要转换为html文件，其文档中不允许出来类似的语法   解决方案：  避免md文档中出现类似的语法">
+
+<link rel="canonical" href="http://yoursite.com/hexo博客/20200225-bf65917.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>博客及主题优化 | 阿沈是也</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c37fb4ddbdd4a0d7c4aedec4db3f9cb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+<script src="/js/photoswipe.min.js?v={{ theme.version }}"></script><script src="/js/photoswipe-ui-default.min.js?v={{ theme.version }}"></script>
+  <!--
+    <script src="/js/src/photoswipe.min.js?v="></script>
+    <script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+  -->
+<link rel="alternate" href="/atom.xml" title="阿沈是也" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿沈是也</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">敲代码中...</h1>
+      
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-fw fa-music"></i>歌单</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos" rel="section"><i class="fa fa-fw fa-camera"></i>照片墙</a>
+
+  </li>
+        <li class="menu-item menu-item-hot">
+
+    <a href="/hot/" rel="section"><i class="fa fa-fw fa-signal"></i>热度排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    
+    
+    
+
+    <main class="main as-main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hexo博客/20200225-bf65917.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ashen_head.jpg">
+      <meta itemprop="name" content="阿沈是也">
+      <meta itemprop="description" content="程序员笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿沈是也">
+    </span>
+      <header class="post-header">
+
+      
+
+
+        <h2 class="post-title" itemprop="name headline">
+          博客及主题优化
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-25 16:44:02" itemprop="dateCreated datePublished" datetime="2020-02-25T16:44:02+08:00">2020-02-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 11:18:06" itemprop="dateModified" datetime="2021-04-08T11:18:06+08:00">2021-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo博客/" itemprop="url" rel="index"><span itemprop="name">hexo博客</span></a>
+                </span>
+            </span>
+
+          
+                 
+            <span id="/hexo博客/20200225-bf65917.html" class="post-meta-item leancloud_visitors" data-flag-title="博客及主题优化" title="阅读数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读数：</span>
+              <span class="leancloud-visitors-count"></span>
+             <!-- <span>次</span> -->
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/hexo博客/20200225-bf65917.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/hexo博客/20200225-bf65917.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+          
+
+        
+      <!-- 文章正文内容 -->
+        <h2 id="踩坑记录"><a href="#踩坑记录" class="headerlink" title="踩坑记录"></a>踩坑记录</h2><ol>
+<li><p>hexo g 报错</p>
+<p>报错如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Error: expected end of comment, got end of file</span><br><span class="line">at Object._prettifyError (...@3.2.1@nunjucks\src\lib.js:36:11)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>  原因：<br>  由于md文档需要转换为html文件，其文档中不允许出来类似的语法</p>
+<p>  解决方案：<br>  避免md文档中出现类似的语法</p>
+<hr>
+<h2 id="开启评论及阅读"><a href="#开启评论及阅读" class="headerlink" title="开启评论及阅读"></a>开启评论及阅读</h2><p>在 themes\next_config.yml 中修改如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">valine:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">appid:</span> <span class="string">YourID</span> <span class="comment"># Your leancloud application appid</span></span><br><span class="line">  <span class="attr">appkey:</span> <span class="string">YourKEY</span> <span class="comment"># Your leancloud application appkey</span></span><br><span class="line">  <span class="attr">notify:</span> <span class="literal">true</span> <span class="comment"># Mail notifier</span></span><br><span class="line">  <span class="attr">verify:</span> <span class="literal">true</span> <span class="comment"># Verification code</span></span><br><span class="line">  <span class="attr">placeholder:</span> <span class="string">欢迎留言...</span> <span class="comment"># Comment box placeholder</span></span><br><span class="line">  <span class="attr">avatar:</span> <span class="string">identicon</span> <span class="comment"># Gravatar style</span></span><br><span class="line">  <span class="attr">guest_info:</span> <span class="string">nick,mail,link</span> <span class="comment"># Custom comment header</span></span><br><span class="line">  <span class="attr">pageSize:</span> <span class="number">10</span> <span class="comment"># Pagination size</span></span><br><span class="line">  <span class="attr">language:</span> <span class="comment"># Language, available values: en, zh-cn</span></span><br><span class="line">  <span class="attr">visitor:</span> <span class="literal">true</span> <span class="comment">#true # Article reading statistic</span></span><br><span class="line">  <span class="attr">comment_count:</span> <span class="literal">true</span> <span class="comment"># If false, comment count will only be displayed in post page, not in home page</span></span><br><span class="line">  <span class="attr">recordIP:</span> <span class="literal">true</span> <span class="comment"># Whether to record the commenter IP</span></span><br><span class="line">  <span class="attr">serverURLs:</span> <span class="comment"># When the custom domain name is enabled, fill it in here (it will be detected automatically by default, no need to fill in)</span></span><br><span class="line">  <span class="comment">#post_meta_order: 0</span></span><br></pre></td></tr></table></figure>
+<p>其中 YourID 及 YourKEY 为 leancloud 中’评论量’的 id 及 key</p>
+<h2 id="将每篇文章的下方的标签的-改为图标"><a href="#将每篇文章的下方的标签的-改为图标" class="headerlink" title="将每篇文章的下方的标签的#改为图标"></a>将每篇文章的下方的标签的#改为图标</h2><p>在 themes\next_config.yml 中修改属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tag_icon: true</span><br></pre></td></tr></table></figure>
+<h2 id="为文章新增阅读时长及文章字数统计"><a href="#为文章新增阅读时长及文章字数统计" class="headerlink" title="为文章新增阅读时长及文章字数统计"></a>为文章新增阅读时长及文章字数统计</h2><p>先安装插件<br><code>npm install hexo-symbols-count-time --save</code></p>
+<p>在 themes\next_config.yml 中新增或者修改如下</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">separated_meta:</span> <span class="literal">true</span> <span class="comment"># 是否另起一行（true的话不和发表时间等同一行）</span></span><br><span class="line">  <span class="attr">item_text_post:</span> <span class="literal">true</span> <span class="comment"># 首页文章统计数量前是否显示文字描述（本文字数、阅读时长）</span></span><br><span class="line">  <span class="attr">item_text_total:</span> <span class="literal">false</span> <span class="comment"># 页面底部统计数量前是否显示文字描述（站点总字数、站点阅读时长）</span></span><br><span class="line">  <span class="attr">awl:</span> <span class="number">4</span> <span class="comment"># Average Word Length</span></span><br><span class="line">  <span class="attr">wpm:</span> <span class="number">275</span> <span class="comment"># Words Per Minute（每分钟阅读词数）</span></span><br><span class="line">  <span class="attr">suffix:</span> <span class="string">mins.</span></span><br></pre></td></tr></table></figure>
+<p>在_config.yml 中新增</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">symbols_count_time:</span></span><br><span class="line">  <span class="attr">symbols:</span> <span class="literal">true</span> <span class="comment"># 文章字数统计</span></span><br><span class="line">  <span class="attr">time:</span> <span class="literal">true</span> <span class="comment"># 文章阅读时长</span></span><br><span class="line">  <span class="attr">total_symbols:</span> <span class="literal">true</span> <span class="comment"># 站点总字数统计</span></span><br><span class="line">  <span class="attr">total_time:</span> <span class="literal">true</span> <span class="comment"># 站点总阅读时长</span></span><br><span class="line">  <span class="attr">exclude_codeblock:</span> <span class="literal">false</span> <span class="comment"># 排除代码字数统计</span></span><br></pre></td></tr></table></figure>
+<h2 id="更换-next-默认头像"><a href="#更换-next-默认头像" class="headerlink" title="更换 next 默认头像"></a>更换 next 默认头像</h2><p>在 themes\next_config.yml 的 avatar 中修改 url 属性，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">avatar:</span><br><span class="line">  url: /images/ashen_head.jpg</span><br></pre></td></tr></table></figure>
+<h2 id="新建热度排行榜"><a href="#新建热度排行榜" class="headerlink" title="新建热度排行榜"></a>新建热度排行榜</h2><p>教程：<a href="https://blog.qust.cc/archives/48665.html" rel="external nofollow noopener noreferrer" target="_blank">https://blog.qust.cc/archives/48665.html</a></p>
+<p>BUG 修改：<a href="https://www.dazhuanlan.com/2019/08/17/5d576bec311dc/" rel="external nofollow noopener noreferrer" target="_blank">https://www.dazhuanlan.com/2019/08/17/5d576bec311dc/</a></p>
+<p>代码纠正</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> query = <span class="keyword">new</span> AV.Query(<span class="string">"Counter"</span>);</span><br><span class="line"><span class="keyword">if</span> (request.object.updatedKeys.indexOf(<span class="string">"time"</span>) !== <span class="number">-1</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> query.get(request.object.id).then(<span class="function"><span class="keyword">function</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj.get(<span class="string">"time"</span>) &gt; request.object.get(<span class="string">"time"</span>)) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> AV.Cloud.Error(<span class="string">"Invalid update!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> request.object.save();</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="添加-Github-丝带或者角标-amp-添加-RSS-订阅-amp-添加动态背景-amp-文章结尾添加结束标记-amp-主页文章添加阴影效果"><a href="#添加-Github-丝带或者角标-amp-添加-RSS-订阅-amp-添加动态背景-amp-文章结尾添加结束标记-amp-主页文章添加阴影效果" class="headerlink" title="添加 Github 丝带或者角标&amp;添加 RSS 订阅&amp;添加动态背景&amp;文章结尾添加结束标记&amp;主页文章添加阴影效果"></a>添加 Github 丝带或者角标&amp;添加 RSS 订阅&amp;添加动态背景&amp;文章结尾添加结束标记&amp;主页文章添加阴影效果</h2><p>教程：<a href="https://blog.csdn.net/Z_Z_W_/article/details/97617436" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/Z<em>Z_W</em>/article/details/97617436</a></p>
+<h3 id="添加动态背景无效解决方案"><a href="#添加动态背景无效解决方案" class="headerlink" title="添加动态背景无效解决方案"></a>添加动态背景无效解决方案</h3><p>链接：<a href="https://www.jianshu.com/p/b9556119ee8a" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/b9556119ee8a</a></p>
+<p><code>cd themes/next</code><br><code>git clone https://github.com/theme-next/theme-next-canvas-nest source/lib/canvas-nest</code></p>
+<h3 id="主页文章添加阴影效果解决方案-四楼"><a href="#主页文章添加阴影效果解决方案-四楼" class="headerlink" title="主页文章添加阴影效果解决方案-四楼"></a>主页文章添加阴影效果解决方案-四楼</h3><p>链接：<a href="https://tieba.baidu.com/p/6365333284?traceid=" rel="external nofollow noopener noreferrer" target="_blank">https://tieba.baidu.com/p/6365333284?traceid=</a></p>
+<h2 id="添加搜索功能-amp-添加相关文章功能"><a href="#添加搜索功能-amp-添加相关文章功能" class="headerlink" title="添加搜索功能&amp;添加相关文章功能"></a>添加搜索功能&amp;添加相关文章功能</h2><p>教程：<a href="http://bamshoot.coding.me/posts/84fe2c24.html" rel="external nofollow noopener noreferrer" target="_blank">http://bamshoot.coding.me/posts/84fe2c24.html</a></p>
+<h2 id="SEO-优化-amp-文章持久化"><a href="#SEO-优化-amp-文章持久化" class="headerlink" title="SEO 优化&amp;文章持久化"></a>SEO 优化&amp;文章持久化</h2><p>设置收录时，若为 next 主题，则直接在<code>themes\next\_config.yml</code>中对应的<code>google_site_verification</code>及<code>baidu_site_verification</code>中添加对应的 content 即可</p>
+<p>（手动推送）教程参考：<a href="http://dugblog.coding.me/Hexo/20180625-Hexo-SEO.html" rel="external nofollow noopener noreferrer" target="_blank">http://dugblog.coding.me/Hexo/20180625-Hexo-SEO.html</a></p>
+<p>文章持久化-算法参考：<a href="http://bamshoot.coding.me/posts/84fe2c24.html" rel="external nofollow noopener noreferrer" target="_blank">http://bamshoot.coding.me/posts/84fe2c24.html</a></p>
+<h2 id="添加顶部加载条-amp-文章加密访问-amp-修改字体大小"><a href="#添加顶部加载条-amp-文章加密访问-amp-修改字体大小" class="headerlink" title="添加顶部加载条&amp;文章加密访问&amp;修改字体大小"></a>添加顶部加载条&amp;文章加密访问&amp;修改字体大小</h2><p>教程：<a href="https://www.jianshu.com/p/f054333ac9e6" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/f054333ac9e6</a></p>
+<h2 id="为博客加上萌萌的宠物"><a href="#为博客加上萌萌的宠物" class="headerlink" title="为博客加上萌萌的宠物"></a>为博客加上萌萌的宠物</h2><p>教程：<a href="https://blog.csdn.net/mqdxiaoxiao/article/details/93793530" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/mqdxiaoxiao/article/details/93793530</a></p>
+<h2 id="百度统计"><a href="#百度统计" class="headerlink" title="百度统计"></a>百度统计</h2><p>教程：<a href="https://blog.csdn.net/loze/article/details/94212661" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/loze/article/details/94212661</a></p>
+<h2 id="在底部增加运行时间"><a href="#在底部增加运行时间" class="headerlink" title="在底部增加运行时间"></a>在底部增加运行时间</h2><p>在 themes\next\layout_partials\footer.swig 中新增</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 在网页底部添加网站运行时间 --&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">&lt;span id=<span class="string">"timeDate"</span>&gt;载入天数...&lt;<span class="regexp">/span&gt;&lt;span id="times"&gt;载入时分秒...&lt;/</span>span&gt;</span><br><span class="line">&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;</span></span><br><span class="line"><span class="regexp">    var now = new Date();</span></span><br><span class="line"><span class="regexp">    function createtime() &#123;</span></span><br><span class="line"><span class="regexp">        var grt= new Date("07/</span><span class="number">21</span>/<span class="number">2018</span> <span class="number">00</span>:<span class="number">00</span>:<span class="number">00</span><span class="string">");//此处修改你的建站时间或者网站上线时间</span></span><br><span class="line"><span class="string">        now.setTime(now.getTime()+250);</span></span><br><span class="line"><span class="string">        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);</span></span><br><span class="line"><span class="string">        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);</span></span><br><span class="line"><span class="string">        if(String(hnum).length ==1 )&#123;hnum = "</span><span class="number">0</span><span class="string">" + hnum;&#125; minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);</span></span><br><span class="line"><span class="string">        mnum = Math.floor(minutes); if(String(mnum).length ==1 )&#123;mnum = "</span><span class="number">0</span><span class="string">" + mnum;&#125;</span></span><br><span class="line"><span class="string">        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);</span></span><br><span class="line"><span class="string">        snum = Math.round(seconds); if(String(snum).length ==1 )&#123;snum = "</span><span class="number">0</span><span class="string">" + snum;&#125;</span></span><br><span class="line"><span class="string">        document.getElementById("</span>timeDate<span class="string">").innerHTML = "</span>Run <span class="keyword">for</span> <span class="string">"+dnum+"</span> Days <span class="string">";</span></span><br><span class="line"><span class="string">        document.getElementById("</span>times<span class="string">").innerHTML = hnum + "</span> Hours <span class="string">" + mnum + "</span> m <span class="string">" + snum + "</span> s<span class="string">";</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">setInterval("</span>createtime()<span class="string">",250);</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>参考链接:<a href="https://www.jianshu.com/p/1ff2fcbdd155" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/1ff2fcbdd155</a></p>
+<h2 id="相册功能"><a href="#相册功能" class="headerlink" title="相册功能"></a>相册功能</h2><p>坑：若运行 tool.py，先确定在 hexo_res 中是否已经存在 photos 及 min_photos</p>
+<p>参考链接：<a href="https://malizhi.cn/HexoAlbum/" rel="external nofollow noopener noreferrer" target="_blank">https://malizhi.cn/HexoAlbum/</a></p>
+<h2 id="样式取消"><a href="#样式取消" class="headerlink" title="样式取消"></a>样式取消</h2><p>让 source 某文件不被 layout 样式影响，在站点的<code>_config.yml</code>中的<code>skip_render:</code>加上对应的文件夹或者文件名</p>
+<p>参考链接:<a href="http://dugblog.coding.me/Hexo/20180620-hexo-private-customization.html" rel="external nofollow noopener noreferrer" target="_blank">http://dugblog.coding.me/Hexo/20180620-hexo-private-customization.html</a></p>
+<h2 id="使用hexo-all-minifier优化hexo访问速度"><a href="#使用hexo-all-minifier优化hexo访问速度" class="headerlink" title="使用hexo-all-minifier优化hexo访问速度"></a>使用hexo-all-minifier优化hexo访问速度</h2><p><code>cnpm install hexo-all-minifier --save</code></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"hexo-site"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.0.0"</span>,</span><br><span class="line">  <span class="attr">"private"</span>: <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"hexo"</span>: &#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"3.9.0"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel-runtime"</span>: <span class="string">"^6.26.0"</span>,</span><br><span class="line">    <span class="attr">"hexo"</span>: <span class="string">"^3.9.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-abbrlink"</span>: <span class="string">"^2.0.5"</span>,</span><br><span class="line">    <span class="attr">"hexo-admin"</span>: <span class="string">"^2.3.0"</span>,</span><br><span class="line">    <span class="comment">// + "hexo-all-minifier": "^0.5.3",</span></span><br><span class="line">    <span class="attr">"hexo-autonofollow"</span>: <span class="string">"^1.0.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-baidu-url-submit"</span>: <span class="string">"^0.0.6"</span>,</span><br><span class="line">    <span class="attr">"hexo-deployer-git"</span>: <span class="string">"^1.0.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-archive"</span>: <span class="string">"^0.1.5"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-category"</span>: <span class="string">"^0.1.3"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-feed"</span>: <span class="string">"^2.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-index"</span>: <span class="string">"^0.2.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-searchdb"</span>: <span class="string">"^1.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-sitemap"</span>: <span class="string">"^2.0.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-generator-tag"</span>: <span class="string">"^0.2.0"</span>,</span><br><span class="line">    <span class="attr">"hexo-helper-live2d"</span>: <span class="string">"^3.1.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-leancloud-counter-security"</span>: <span class="string">"^1.4.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-ejs"</span>: <span class="string">"^0.3.1"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-marked"</span>: <span class="string">"^0.3.2"</span>,</span><br><span class="line">    <span class="attr">"hexo-renderer-stylus"</span>: <span class="string">"^0.3.3"</span>,</span><br><span class="line">    <span class="attr">"hexo-server"</span>: <span class="string">"^0.3.3"</span>,</span><br><span class="line">    <span class="attr">"hexo-symbols-count-time"</span>: <span class="string">"^0.7.0"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在站点的_config.yml中配置<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">tml_minifier:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">exclude:</span> </span><br><span class="line"></span><br><span class="line"><span class="attr">css_minifier:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">exclude:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">'*.min.css'</span></span><br><span class="line"></span><br><span class="line"><span class="attr">js_minifier:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">mangle:</span> <span class="literal">true</span></span><br><span class="line">  <span class="attr">output:</span></span><br><span class="line">  <span class="attr">compress:</span></span><br><span class="line">  <span class="attr">exclude:</span> </span><br><span class="line">    <span class="bullet">-</span> <span class="string">'*.min.js'</span></span><br></pre></td></tr></table></figure></p>
+<p>参考链接：<a href="https://www.difashi.com/2020-02/20-hexo-minifier.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.difashi.com/2020-02/20-hexo-minifier.html</a></p>
+<h2 id="图片放大镜功能"><a href="#图片放大镜功能" class="headerlink" title="图片放大镜功能"></a>图片放大镜功能</h2><p>在<code>themes\next\_config.yml</code>中设置</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">fancybox:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h2 id="增加音乐播放器"><a href="#增加音乐播放器" class="headerlink" title="增加音乐播放器"></a>增加音乐播放器</h2><p><a href="https://music.163.com/#/playlist?id=377283757" rel="external nofollow noopener noreferrer" target="_blank">https://music.163.com/#/playlist?id=377283757</a></p>
+<p>参考链接：<a href="https://www.jianshu.com/p/f1005ae09e5a" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/f1005ae09e5a</a></p>
+<h2 id="YAMLException-end-of-the-stream-or-a-document-separator-is-expected…"><a href="#YAMLException-end-of-the-stream-or-a-document-separator-is-expected…" class="headerlink" title="YAMLException: end of the stream or a document separator is expected…"></a>YAMLException: end of the stream or a document separator is expected…</h2><p>报错例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">YAMLException: end of the stream or a document separator is expected at line 4, column 1:</span><br><span class="line">    - [x] 提交入职材料</span><br></pre></td></tr></table></figure></p>
+<p>解决方案：在文章顶部增加下述代码</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">abbrlink: &apos;0&apos;</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>更多解决方案，可参考：<a href="https://blog.csdn.net/yongf2014/article/details/50016783" rel="external nofollow noopener noreferrer" target="_blank">https://blog.csdn.net/yongf2014/article/details/50016783</a></p>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h2><p>Q：为什么全是链接？</p>
+<p>A：既然已经现存方案，先不造轮子，后续若有时间，会将他们搬进来</p>
+
+
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-----本文结束 <i class="fa fa-code ashen-margin-lr-4"></i> 感谢阅读-----</div>
+    
+</div>
+      </div>
+       
+    </div>
+
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_wechatpay.jpg" alt="阿沈是也 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_alipay.jpg" alt="阿沈是也 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>阿沈是也
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/hexo博客/20200225-bf65917.html" title="博客及主题优化">http://yoursite.com/hexo博客/20200225-bf65917.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/读书笔记/" rel="tag"><i class="fa fa-tag"></i> 读书笔记</a>
+              <a href="/tags/信息安全/" rel="tag"><i class="fa fa-tag"></i> 信息安全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/读书笔记/20190226-3458d19b.html" rel="prev" title="HTML5安全">
+      <i class="fa fa-chevron-left"></i> HTML5安全
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/Vue/20200228-5414158b.html" rel="next" title="Vue源码研读笔记">
+      Vue源码研读笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#踩坑记录"><span class="nav-number">1.</span> <span class="nav-text">踩坑记录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#开启评论及阅读"><span class="nav-number">2.</span> <span class="nav-text">开启评论及阅读</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#将每篇文章的下方的标签的-改为图标"><span class="nav-number">3.</span> <span class="nav-text">将每篇文章的下方的标签的#改为图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为文章新增阅读时长及文章字数统计"><span class="nav-number">4.</span> <span class="nav-text">为文章新增阅读时长及文章字数统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更换-next-默认头像"><span class="nav-number">5.</span> <span class="nav-text">更换 next 默认头像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新建热度排行榜"><span class="nav-number">6.</span> <span class="nav-text">新建热度排行榜</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加-Github-丝带或者角标-amp-添加-RSS-订阅-amp-添加动态背景-amp-文章结尾添加结束标记-amp-主页文章添加阴影效果"><span class="nav-number">7.</span> <span class="nav-text">添加 Github 丝带或者角标&amp;添加 RSS 订阅&amp;添加动态背景&amp;文章结尾添加结束标记&amp;主页文章添加阴影效果</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#添加动态背景无效解决方案"><span class="nav-number">7.1.</span> <span class="nav-text">添加动态背景无效解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主页文章添加阴影效果解决方案-四楼"><span class="nav-number">7.2.</span> <span class="nav-text">主页文章添加阴影效果解决方案-四楼</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加搜索功能-amp-添加相关文章功能"><span class="nav-number">8.</span> <span class="nav-text">添加搜索功能&amp;添加相关文章功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SEO-优化-amp-文章持久化"><span class="nav-number">9.</span> <span class="nav-text">SEO 优化&amp;文章持久化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加顶部加载条-amp-文章加密访问-amp-修改字体大小"><span class="nav-number">10.</span> <span class="nav-text">添加顶部加载条&amp;文章加密访问&amp;修改字体大小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为博客加上萌萌的宠物"><span class="nav-number">11.</span> <span class="nav-text">为博客加上萌萌的宠物</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#百度统计"><span class="nav-number">12.</span> <span class="nav-text">百度统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在底部增加运行时间"><span class="nav-number">13.</span> <span class="nav-text">在底部增加运行时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相册功能"><span class="nav-number">14.</span> <span class="nav-text">相册功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#样式取消"><span class="nav-number">15.</span> <span class="nav-text">样式取消</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用hexo-all-minifier优化hexo访问速度"><span class="nav-number">16.</span> <span class="nav-text">使用hexo-all-minifier优化hexo访问速度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图片放大镜功能"><span class="nav-number">17.</span> <span class="nav-text">图片放大镜功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加音乐播放器"><span class="nav-number">18.</span> <span class="nav-text">增加音乐播放器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YAMLException-end-of-the-stream-or-a-document-separator-is-expected…"><span class="nav-number">19.</span> <span class="nav-text">YAMLException: end of the stream or a document separator is expected…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-amp-A"><span class="nav-number">20.</span> <span class="nav-text">Q&amp;A</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿沈是也" src="/images/ashen_head.jpg">
+  <p class="site-author-name" itemprop="name">阿沈是也</p>
+  <div class="site-description" itemprop="description">程序员笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ashen114" title="GitHub → https://github.com/ashen114" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1215772764@qq.com" title="E-Mail → mailto:1215772764@qq.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿沈是也</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:24</span>
+</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+<!-- 在网页底部添加网站运行时间 -->
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+</div>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/25/2020 17:59:09");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "自建站已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'z262SSq7M28bIiXvnwKOhrnD-gzGzoHsz',
+      appKey     : 'KedMI8KD71pGhDYdgR4KGQMm',
+      placeholder: "欢迎留言...",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

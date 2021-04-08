@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+<script>
+// 在github环境下出错，待处理
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Mfs-701ND1wnyMF5ggu23Tkl7PrRR-op_fhel6D0E4I">
+  <meta name="baidu-site-verification" content="V9pGumsldr">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+  <meta name="description" content="信息系统运行与维护一、基础概念篇第 1 章：信息系统运维概述1.1 信息系统概述1.1.1 信息系统 技术要素   1）数据  （1）信息 （2）知识 （3）智慧     2）硬件 3）软件  （1）基础软件 （2）信息系统软件   4）通信网络  5）基础设施   人 组织  1.1.2 信息系统的影响因素 内部因素   （1）战略计划 （2）管理高层 （3）用户需求 （4）IT 部门 （5）现">
+<meta name="keywords" content="前端,后端,阿沈,Ashen114,阿沈的博客,个人博客,博客,Vue,Node,js,JavaScript,ts,typeScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息系统运行与维护">
+<meta property="og:url" content="http://yoursite.com/读书笔记/20180913-6cb531db.html">
+<meta property="og:site_name" content="阿沈是也">
+<meta property="og:description" content="信息系统运行与维护一、基础概念篇第 1 章：信息系统运维概述1.1 信息系统概述1.1.1 信息系统 技术要素   1）数据  （1）信息 （2）知识 （3）智慧     2）硬件 3）软件  （1）基础软件 （2）信息系统软件   4）通信网络  5）基础设施   人 组织  1.1.2 信息系统的影响因素 内部因素   （1）战略计划 （2）管理高层 （3）用户需求 （4）IT 部门 （5）现">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-04-08T03:18:06.377Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息系统运行与维护">
+<meta name="twitter:description" content="信息系统运行与维护一、基础概念篇第 1 章：信息系统运维概述1.1 信息系统概述1.1.1 信息系统 技术要素   1）数据  （1）信息 （2）知识 （3）智慧     2）硬件 3）软件  （1）基础软件 （2）信息系统软件   4）通信网络  5）基础设施   人 组织  1.1.2 信息系统的影响因素 内部因素   （1）战略计划 （2）管理高层 （3）用户需求 （4）IT 部门 （5）现">
+
+<link rel="canonical" href="http://yoursite.com/读书笔记/20180913-6cb531db.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>信息系统运行与维护 | 阿沈是也</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c37fb4ddbdd4a0d7c4aedec4db3f9cb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+<script src="/js/photoswipe.min.js?v={{ theme.version }}"></script><script src="/js/photoswipe-ui-default.min.js?v={{ theme.version }}"></script>
+  <!--
+    <script src="/js/src/photoswipe.min.js?v="></script>
+    <script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+  -->
+<link rel="alternate" href="/atom.xml" title="阿沈是也" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿沈是也</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">敲代码中...</h1>
+      
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-fw fa-music"></i>歌单</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos" rel="section"><i class="fa fa-fw fa-camera"></i>照片墙</a>
+
+  </li>
+        <li class="menu-item menu-item-hot">
+
+    <a href="/hot/" rel="section"><i class="fa fa-fw fa-signal"></i>热度排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    
+    
+    
+
+    <main class="main as-main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/读书笔记/20180913-6cb531db.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ashen_head.jpg">
+      <meta itemprop="name" content="阿沈是也">
+      <meta itemprop="description" content="程序员笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿沈是也">
+    </span>
+      <header class="post-header">
+
+      
+
+
+        <h2 class="post-title" itemprop="name headline">
+          信息系统运行与维护
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-13 10:26:41" itemprop="dateCreated datePublished" datetime="2018-09-13T10:26:41+08:00">2018-09-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 11:18:06" itemprop="dateModified" datetime="2021-04-08T11:18:06+08:00">2021-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/读书笔记/" itemprop="url" rel="index"><span itemprop="name">读书笔记</span></a>
+                </span>
+            </span>
+
+          
+                 
+            <span id="/读书笔记/20180913-6cb531db.html" class="post-meta-item leancloud_visitors" data-flag-title="信息系统运行与维护" title="阅读数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读数：</span>
+              <span class="leancloud-visitors-count"></span>
+             <!-- <span>次</span> -->
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/读书笔记/20180913-6cb531db.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/读书笔记/20180913-6cb531db.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+          
+
+        
+      <!-- 文章正文内容 -->
+        <h1 id="信息系统运行与维护"><a href="#信息系统运行与维护" class="headerlink" title="信息系统运行与维护"></a>信息系统运行与维护</h1><h2 id="一、基础概念篇"><a href="#一、基础概念篇" class="headerlink" title="一、基础概念篇"></a>一、基础概念篇</h2><h3 id="第-1-章：信息系统运维概述"><a href="#第-1-章：信息系统运维概述" class="headerlink" title="第 1 章：信息系统运维概述"></a>第 1 章：信息系统运维概述</h3><h4 id="1-1-信息系统概述"><a href="#1-1-信息系统概述" class="headerlink" title="1.1 信息系统概述"></a>1.1 信息系统概述</h4><h5 id="1-1-1-信息系统"><a href="#1-1-1-信息系统" class="headerlink" title="1.1.1 信息系统"></a>1.1.1 信息系统</h5><ol>
+<li>技术要素</li>
+</ol>
+<ul>
+<li><p>1）数据</p>
+<ul>
+<li>（1）信息</li>
+<li>（2）知识</li>
+<li>（3）智慧</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2）硬件</li>
+<li><p>3）软件</p>
+<ul>
+<li>（1）基础软件</li>
+<li>（2）信息系统软件</li>
+</ul>
+</li>
+<li><p>4）通信网络</p>
+</li>
+<li>5）基础设施</li>
+</ul>
+<ol start="2">
+<li>人</li>
+<li>组织</li>
+</ol>
+<h5 id="1-1-2-信息系统的影响因素"><a href="#1-1-2-信息系统的影响因素" class="headerlink" title="1.1.2 信息系统的影响因素"></a>1.1.2 信息系统的影响因素</h5><ol>
+<li>内部因素</li>
+</ol>
+<ul>
+<li>（1）战略计划</li>
+<li>（2）管理高层</li>
+<li>（3）用户需求</li>
+<li>（4）IT 部门</li>
+<li>（5）现行信息化基础</li>
+</ul>
+<ol start="2">
+<li>外部因素</li>
+</ol>
+<ul>
+<li>（1）技术</li>
+<li>（2）供应商</li>
+<li>（3）客户</li>
+<li>（4）竞争对手</li>
+<li>（5）经济环境</li>
+<li>（6）政府</li>
+</ul>
+<ol start="3">
+<li>新兴 IT 技术系统的影响</li>
+</ol>
+<ul>
+<li>1）转变了商业模式</li>
+<li>2）降低了信息系统建设的成本和风险</li>
+<li>3）改变了信息系统建设的内涵</li>
+<li>4）改变了信息系统运维的职能</li>
+<li>5）突破了时空的局限</li>
+<li>6）高度关注数据的安全与价值</li>
+</ul>
+<h4 id="1-2-信息系统运维"><a href="#1-2-信息系统运维" class="headerlink" title="1.2 信息系统运维"></a>1.2 信息系统运维</h4><h5 id="1-2-1-信息系统运维的概念"><a href="#1-2-1-信息系统运维的概念" class="headerlink" title="1.2.1 信息系统运维的概念"></a>1.2.1 信息系统运维的概念</h5><ul>
+<li><p>内容：</p>
+<ul>
+<li>（1）泛化的观点：指软件交互后围绕它所进行的任何工作</li>
+<li>（2）纠错的观点：指软件运行中错误的发现和更正</li>
+<li>（3）适应的观点：为适应内外环境的变化</li>
+<li>（4）用户支持的观点：指为软件最终用户提供的支持</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>“管理”的视角</li>
+<li>“视角”的视角</li>
+<li>“安全”的视角</li>
+<li>“治理”的视角</li>
+<li>“实践”的视角</li>
+</ol>
+<h5 id="1-2-2-信息系统运维的框架"><a href="#1-2-2-信息系统运维的框架" class="headerlink" title="1.2.2 信息系统运维的框架"></a>1.2.2 信息系统运维的框架</h5><ol>
+<li>信息系统运维的目标</li>
+</ol>
+<ul>
+<li>（1）安全</li>
+<li>（2）可靠</li>
+<li>（3）可用</li>
+<li>（4）可控</li>
+</ul>
+<ol start="2">
+<li>信息系统运维的内容</li>
+</ol>
+<ul>
+<li>（1）例行操作</li>
+<li>（2）响应支持</li>
+<li>（3）优化改善</li>
+<li>（4）咨询评估</li>
+</ul>
+<ol start="3">
+<li>信息系统运维的对象</li>
+</ol>
+<ul>
+<li>（1）基础环境</li>
+<li>（2）网络平台</li>
+<li>（3）硬件设备</li>
+<li>（4）基础软件</li>
+<li>（5）信息系统软件</li>
+<li>（6）数据</li>
+</ul>
+<ol start="4">
+<li>信息系统运维平台</li>
+<li>信息系统运维支撑要素</li>
+</ol>
+<h5 id="1-2-3-信息系统运维的要求"><a href="#1-2-3-信息系统运维的要求" class="headerlink" title="1.2.3 信息系统运维的要求"></a>1.2.3 信息系统运维的要求</h5><ol>
+<li>银行业</li>
+</ol>
+<ul>
+<li>（1）可用性要求级别高</li>
+<li>（2）安全性要求级别高</li>
+<li>（3）数据运维责任大</li>
+</ul>
+<ol start="2">
+<li>大型网站</li>
+</ol>
+<ul>
+<li>（1）线上稳定</li>
+<li>（2）客户体验为先</li>
+<li>（3）迫切要求解决峰值运维问题</li>
+<li>（4）自动化要求高</li>
+</ul>
+<ol start="3">
+<li>电信行业</li>
+</ol>
+<ul>
+<li>（1）“全程全网性”</li>
+<li>（2）数据利用与分析的需求强烈</li>
+<li>（3）运维成本压力大</li>
+</ul>
+<ol start="4">
+<li>政府</li>
+</ol>
+<ul>
+<li>（1）安全级别高</li>
+<li>（2）业务的不间断运维需求高</li>
+<li>（3）例行运维亟需加强</li>
+</ul>
+<ol start="5">
+<li>制造业</li>
+</ol>
+<ul>
+<li>（1）集成运维需求强烈</li>
+<li>（2）运维管理亟待重视</li>
+<li>（3）安全运维不可忽略</li>
+</ul>
+<h4 id="1-3-信息系统运维的发展"><a href="#1-3-信息系统运维的发展" class="headerlink" title="1.3 信息系统运维的发展"></a>1.3 信息系统运维的发展</h4><h5 id="1-3-1-信息系统运维的发展现状"><a href="#1-3-1-信息系统运维的发展现状" class="headerlink" title="1.3.1 信息系统运维的发展现状"></a>1.3.1 信息系统运维的发展现状</h5><ol>
+<li>从具体工作来看</li>
+<li>从我国信息系统运维的总体现状来看</li>
+</ol>
+<ul>
+<li>（1）从时间周期来看</li>
+<li>（2）从信息系统效益来看</li>
+<li>（3）从资金投入来看</li>
+</ul>
+<ol start="3">
+<li>从国外信息系统运维的情形来看</li>
+<li>从运维人才的需求与培养来看</li>
+</ol>
+<h5 id="1-3-2-信息系统运维的发展阶段"><a href="#1-3-2-信息系统运维的发展阶段" class="headerlink" title="1.3.2 信息系统运维的发展阶段"></a>1.3.2 信息系统运维的发展阶段</h5><ol>
+<li>网络系统管理阶段</li>
+<li>IT 服务管理阶段</li>
+<li>业务服务阶段</li>
+</ol>
+<h5 id="1-3-3-信息系统运维的发展趋势"><a href="#1-3-3-信息系统运维的发展趋势" class="headerlink" title="1.3.3 信息系统运维的发展趋势"></a>1.3.3 信息系统运维的发展趋势</h5><ol>
+<li>理念层面–运维之道</li>
+</ol>
+<ul>
+<li>1）服务</li>
+</ul>
+<ul>
+<li>2）敏捷<ul>
+<li>（1）意识部署已成为产品发布的瓶颈的敏捷开发者</li>
+<li>（2）来自于快速增长的 Web2.0 企业</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>管理层面–运维之略</li>
+<li>技术层面–运维之术</li>
+</ol>
+<ul>
+<li>1）自动化</li>
+<li>2）虚拟化</li>
+<li>3）数据化</li>
+<li>4）绿色化</li>
+</ul>
+<h3 id="第-2-章：信息系统运维的组织与管理"><a href="#第-2-章：信息系统运维的组织与管理" class="headerlink" title="第 2 章：信息系统运维的组织与管理"></a>第 2 章：信息系统运维的组织与管理</h3><h4 id="2-1-信息系统运维的管理"><a href="#2-1-信息系统运维的管理" class="headerlink" title="2.1 信息系统运维的管理"></a>2.1 信息系统运维的管理</h4><h5 id="2-1-1-信息系统运维管理体系框架"><a href="#2-1-1-信息系统运维管理体系框架" class="headerlink" title="2.1.1 信息系统运维管理体系框架"></a>2.1.1 信息系统运维管理体系框架</h5><ol>
+<li>信息系统运维管理职能</li>
+</ol>
+<ul>
+<li>设施运维</li>
+<li>软件运维</li>
+<li>数据运维</li>
+<li>安全运维</li>
+<li>…..</li>
+</ul>
+<ol start="2">
+<li>信息系统运维管理流程</li>
+</ol>
+<ul>
+<li>事件管理</li>
+<li>事故管理</li>
+<li>问题管理</li>
+<li>配置管理</li>
+<li>变更管理</li>
+<li>发布管理</li>
+<li>知识管理</li>
+<li>…..</li>
+</ul>
+<ol start="3">
+<li>信息系统运维管理系统与专用工具</li>
+</ol>
+<h5 id="2-1-2-信息系统运维管理主要流程"><a href="#2-1-2-信息系统运维管理主要流程" class="headerlink" title="2.1.2 信息系统运维管理主要流程"></a>2.1.2 信息系统运维管理主要流程</h5><ul>
+<li><p>目标：</p>
+<ul>
+<li>（1）标准话</li>
+<li>（2）流程化</li>
+<li>（3）自动化</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>事件管理</p>
+<ul>
+<li>（1）事件发生和通告</li>
+<li>（2）事件检测和录入</li>
+<li>（3）事件过滤</li>
+<li>（4）事件分类</li>
+<li>（5）事件关联</li>
+<li>（6）响应选择</li>
+<li>（7）事件关闭</li>
+<li>（8）事件评估</li>
+</ul>
+</li>
+<li><p>事故管理</p>
+<ul>
+<li>（1）事故识别与纪录</li>
+<li>（2）事故分类和优先级处理</li>
+<li>（3）初步支持</li>
+<li>（4）事故升级</li>
+<li>（5）调查和诊断</li>
+<li>（6）解决和恢复</li>
+</ul>
+</li>
+<li><p>问题管理</p>
+<ul>
+<li>（1）问题检测和记录</li>
+<li>（2）问题分类和优先级处理</li>
+<li>（3）问题调查和诊断</li>
+<li>（4）创建已知错误记录</li>
+<li>（5）解决问题</li>
+<li>（6）关闭问题</li>
+<li>（7）重大问题的评估</li>
+</ul>
+</li>
+<li><p>配置管理</p>
+<ul>
+<li>（1）管理规划</li>
+<li>（2）配置识别</li>
+<li>（3）配置控制</li>
+<li>（4）状态记录和报告</li>
+<li>（5）确认和审核</li>
+</ul>
+</li>
+<li><p>变更管理</p>
+<ul>
+<li>（1）创建变更请求</li>
+<li>（2）记录和过滤变更请求</li>
+<li>（3）评审变更</li>
+<li>（4）授权变更</li>
+<li>（5）变更规划</li>
+<li>（6）协调变更实施</li>
+<li>（7）回顾和关闭变更</li>
+</ul>
+</li>
+<li><p>发布管理</p>
+<ul>
+<li>1）发布规划</li>
+</ul>
+<ul>
+<li><p>2）发布设计、构建和配置</p>
+<ul>
+<li>（1）设计</li>
+<li>（2）构建</li>
+<li>（3）配置</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>3）发布验收</li>
+<li>4）试运营规划</li>
+<li>5）沟通、准备和培训</li>
+<li>6）发布分发和安装</li>
+</ul>
+</li>
+<li><p>知识管理</p>
+<ul>
+<li>（1）知识识别和分享</li>
+<li>（2）初始化知识库</li>
+<li>（3）知识提交和入库</li>
+<li>（4）知识过滤和审核</li>
+<li>（5）知识发布和分享</li>
+<li>（6）知识维护和评估</li>
+</ul>
+</li>
+</ol>
+<h5 id="2-1-3-信息系统运维管理制度"><a href="#2-1-3-信息系统运维管理制度" class="headerlink" title="2.1.3 信息系统运维管理制度"></a>2.1.3 信息系统运维管理制度</h5><ul>
+<li>（1）网络管理制度</li>
+<li>（2）系统和应用管理制度</li>
+<li>（3）安全管理制度</li>
+<li>（4）存储备份管理制度</li>
+<li>（5）故障管理制度</li>
+<li>（6）技术支持工具管理制度</li>
+<li>（7）质量考核制度</li>
+</ul>
+<h5 id="2-1-4-信息系统运维管理系统与专用工具"><a href="#2-1-4-信息系统运维管理系统与专用工具" class="headerlink" title="2.1.4 信息系统运维管理系统与专用工具"></a>2.1.4 信息系统运维管理系统与专用工具</h5><h4 id="2-2-信息系统运维的组织"><a href="#2-2-信息系统运维的组织" class="headerlink" title="2.2 信息系统运维的组织"></a>2.2 信息系统运维的组织</h4><h5 id="2-2-1-信息系统运维的任务"><a href="#2-2-1-信息系统运维的任务" class="headerlink" title="2.2.1 信息系统运维的任务"></a>2.2.1 信息系统运维的任务</h5><ol>
+<li><p>信息系统的日常运行管理</p>
+<ul>
+<li>（1）数据的收集</li>
+<li>（2）例行信息处理及服务工作</li>
+<li>（3）计算机硬件的运维</li>
+<li>（4）系统的安全管理</li>
+</ul>
+</li>
+<li><p>信息系统运行情况的记录</p>
+<ul>
+<li>（1）有关工作数量的信息</li>
+<li>（2）工作效率</li>
+<li>（3）系统所提供的信息服务的质量</li>
+<li>（4）系统的维护</li>
+<li>（5）系统的故障情况</li>
+</ul>
+</li>
+<li><p>系统运行情况的检查与评价</p>
+<ul>
+<li>（1）系统是否达到预定目标，目标是否需做修改</li>
+<li>（2）系统的适应性、安全性评价</li>
+<li>（3）系统的社会经济效益评价</li>
+</ul>
+</li>
+</ol>
+<h5 id="2-2-2-信息系统运维管理的职责"><a href="#2-2-2-信息系统运维管理的职责" class="headerlink" title="2.2.2 信息系统运维管理的职责"></a>2.2.2 信息系统运维管理的职责</h5><ul>
+<li>P45</li>
+</ul>
+<h5 id="2-2-3-信息系统运维人员的管理"><a href="#2-2-3-信息系统运维人员的管理" class="headerlink" title="2.2.3 信息系统运维人员的管理"></a>2.2.3 信息系统运维人员的管理</h5><ol>
+<li><p>运维人员的内容</p>
+<ul>
+<li>（1）明确各业务人员的任务和职权范围</li>
+<li>（2）对每个岗位的工作定期检查与评价</li>
+<li>（3）在工作中对工作人员进行培训</li>
+</ul>
+</li>
+<li><p>运维人员管理的意义</p>
+</li>
+<li><p>运维人员管理的意识</p>
+<ul>
+<li>（1）服务意识</li>
+<li>（2）学习意识</li>
+<li>（3）创新意识</li>
+<li>（4）专业意识</li>
+<li>（5）主动意识</li>
+<li>（6）安全意识</li>
+<li>（7）团队意识</li>
+</ul>
+</li>
+<li><p>运维人员的学习培训</p>
+</li>
+</ol>
+<h5 id="2-2-4-信息系统的运维模式"><a href="#2-2-4-信息系统的运维模式" class="headerlink" title="2.2.4 信息系统的运维模式"></a>2.2.4 信息系统的运维模式</h5><ol>
+<li>自主运维模式</li>
+<li>完全外包运维模式</li>
+<li>混合运维模式</li>
+</ol>
+<h4 id="2-3-信息系统运维的外包"><a href="#2-3-信息系统运维的外包" class="headerlink" title="2.3 信息系统运维的外包"></a>2.3 信息系统运维的外包</h4><h5 id="2-3-1-信息系统运维外包的概念"><a href="#2-3-1-信息系统运维外包的概念" class="headerlink" title="2.3.1 信息系统运维外包的概念"></a>2.3.1 信息系统运维外包的概念</h5><ul>
+<li>（1）有利于提高组织竞争力</li>
+<li>（2）借助专业公司的管理流程和工具软件降低信息系统的成本</li>
+<li>（3）提高服务质量、降低故障率</li>
+<li>（4）降低业务部门隐性成本</li>
+</ul>
+<h5 id="2-3-2-信息系统运维外包的模式"><a href="#2-3-2-信息系统运维外包的模式" class="headerlink" title="2.3.2 信息系统运维外包的模式"></a>2.3.2 信息系统运维外包的模式</h5><ol>
+<li>完全外包模式</li>
+<li>部分外包模式</li>
+</ol>
+<h5 id="2-3-3-信息系统运维外包的内容"><a href="#2-3-3-信息系统运维外包的内容" class="headerlink" title="2.3.3 信息系统运维外包的内容"></a>2.3.3 信息系统运维外包的内容</h5><ol>
+<li><p>桌面支持外包</p>
+<ul>
+<li>（1）系统初始检查</li>
+<li>（2）硬件故障解决</li>
+<li>（3）硬件扩容升级</li>
+<li>（4）软件系统支持</li>
+<li>（5）防病毒系统的支持</li>
+<li>（6）网络系统的支持</li>
+<li>（7）日常维护管理</li>
+<li>（8）咨询服务</li>
+</ul>
+</li>
+<li><p>基础设施外包</p>
+<ul>
+<li>（1）系统、服务器维护支持</li>
+<li>（2）软件、服务调试</li>
+<li>（3）网络系统维护</li>
+<li>（4）系统迁移</li>
+<li>（5）数据库维护支持</li>
+<li>（6）数据存储和容灾管理</li>
+<li>（7）安全系统的支持</li>
+<li>（8）网站支持</li>
+<li>（9）咨询服务</li>
+</ul>
+</li>
+<li><p>应用系统外包</p>
+</li>
+</ol>
+<h5 id="2-3-4-信息系统运维外包的风险管理"><a href="#2-3-4-信息系统运维外包的风险管理" class="headerlink" title="2.3.4 信息系统运维外包的风险管理"></a>2.3.4 信息系统运维外包的风险管理</h5><ol>
+<li><p>风险分类</p>
+<ul>
+<li>（1）外部环境不确定性</li>
+<li>（2）运维外包决策的复杂性</li>
+<li>（3）运维外包双方的关系复杂性</li>
+<li>（4）运维工作本身的复杂性</li>
+</ul>
+</li>
+<li><p>风险分析</p>
+<ul>
+<li>（1）组织成本有可能增加</li>
+<li>（2）组织对服务商的依赖和外包合同缺乏灵活性可能降低组织的灵活性</li>
+<li>（3）可能会泄露组织的商业机密</li>
+<li>（4）对外包商缺乏恰当的监督</li>
+</ul>
+</li>
+<li><p>风险评估</p>
+</li>
+<li>风险规避<ul>
+<li>1）核算外包成本，控制额外支出</li>
+<li>2）组织仍需不断学习</li>
+<li>3）选择合适的外包商</li>
+<li>4）签订完整灵活的外包合同</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-4-信息系统运维管理标准"><a href="#2-4-信息系统运维管理标准" class="headerlink" title="2.4 信息系统运维管理标准"></a>2.4 信息系统运维管理标准</h4><h5 id="2-4-1“ITIL”"><a href="#2-4-1“ITIL”" class="headerlink" title="2.4.1“ITIL”"></a>2.4.1“ITIL”</h5><ol>
+<li>“ITIL”的产生与发展</li>
+<li>“ITIL v3 核心架构”</li>
+</ol>
+<h5 id="2-4-2“COBIT”"><a href="#2-4-2“COBIT”" class="headerlink" title="2.4.2“COBIT”"></a>2.4.2“COBIT”</h5><h4 id="2-5-信息系统运维管理系统与专用工具"><a href="#2-5-信息系统运维管理系统与专用工具" class="headerlink" title="2.5 信息系统运维管理系统与专用工具"></a>2.5 信息系统运维管理系统与专用工具</h4><h5 id="2-5-1-信息系统运维管理系统功能框架"><a href="#2-5-1-信息系统运维管理系统功能框架" class="headerlink" title="2.5.1 信息系统运维管理系统功能框架"></a>2.5.1 信息系统运维管理系统功能框架</h5><ol>
+<li><p>资产管理</p>
+<ul>
+<li><p>1）静态资产信息管理</p>
+<ul>
+<li>（1）资产信息维护</li>
+<li>（2）资产信息分析统计</li>
+<li>（3）资产生命周期管理</li>
+<li>（4）辅助决策</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2）动态资产信息管理</li>
+</ul>
+</li>
+<li><p>流程管理</p>
+<ul>
+<li><p>1）事件管理</p>
+<ul>
+<li>功能：P58</li>
+</ul>
+</li>
+<li><p>2)事故管理</p>
+<ul>
+<li>功能：P59</li>
+</ul>
+</li>
+<li><p>3）问题管理</p>
+<ul>
+<li>功能：P59</li>
+</ul>
+</li>
+<li><p>4）配置管理</p>
+<ul>
+<li>功能：P60</li>
+</ul>
+</li>
+<li><p>5）变更管理</p>
+<ul>
+<li>功能：P60</li>
+</ul>
+</li>
+<li><p>6）发布管理</p>
+<ul>
+<li>功能：P61</li>
+</ul>
+</li>
+<li><p>7）知识管理</p>
+<ul>
+<li>功能：P61</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>监控管理</p>
+<ul>
+<li>1）视图管理</li>
+</ul>
+<ul>
+<li><p>2）资源监控</p>
+<ul>
+<li>（1）资源信息维护</li>
+<li>（2）资源模型编辑</li>
+<li>（3）可视化监控</li>
+<li>（4）配置信息下发和配置文件管理</li>
+<li>（5）资源信息统计分析</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>3）故障管理</li>
+<li>4）性能管理</li>
+</ul>
+</li>
+<li><p>外包管理</p>
+<ul>
+<li>1）结果控制管理</li>
+<li>2）过程控制管理</li>
+</ul>
+</li>
+<li><p>安全管理</p>
+</li>
+<li>综合管理</li>
+</ol>
+<h5 id="2-5-2-运维管理系统"><a href="#2-5-2-运维管理系统" class="headerlink" title="2.5.2 运维管理系统"></a>2.5.2 运维管理系统</h5><ul>
+<li>（1）CA 公司的 USPSD</li>
+<li>（2）HP 公司的运维管理平台</li>
+<li>（3）北塔的运维管理系统 BTIM</li>
+<li>（4）开源运维管理系统</li>
+</ul>
+<h5 id="2-5-3-运维管理专用工具"><a href="#2-5-3-运维管理专用工具" class="headerlink" title="2.5.3 运维管理专用工具"></a>2.5.3 运维管理专用工具</h5><ol>
+<li><p>“ITIL”流程管理平台 Remedy</p>
+<ul>
+<li>（1）BMC Remedy Service Desk</li>
+<li>（2）BMC Remedy Change and Release Management</li>
+<li>（3）BMC Remedy Asset Configuration Management</li>
+<li>（4）BMC Remedy Level Management</li>
+<li>（5）BMC Discovery</li>
+<li>（6）BMC Configuration Mangement</li>
+</ul>
+</li>
+<li><p>自动化运维操作管理平台</p>
+</li>
+<li><p>配置管理系统</p>
+<ul>
+<li>（1）信息整合</li>
+<li>（2）关系映射</li>
+<li>（3）流程支持</li>
+<li>（4）软件库与硬件库</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-6-信息系统运维管理的发展–云运维管理"><a href="#2-6-信息系统运维管理的发展–云运维管理" class="headerlink" title="2.6 信息系统运维管理的发展–云运维管理"></a>2.6 信息系统运维管理的发展–云运维管理</h4><h5 id="2-6-1-云运维管理概述"><a href="#2-6-1-云运维管理概述" class="headerlink" title="2.6.1 云运维管理概述"></a>2.6.1 云运维管理概述</h5><h5 id="2-6-2-云运维管理的功能"><a href="#2-6-2-云运维管理的功能" class="headerlink" title="2.6.2 云运维管理的功能"></a>2.6.2 云运维管理的功能</h5><ol>
+<li>自服务门户</li>
+<li>身份与访问管理</li>
+<li>服务目录管理</li>
+<li>服务规则管理</li>
+<li>资源调度管理</li>
+<li>资源监控管理</li>
+<li>服务合规审计</li>
+<li>服务运营监控</li>
+<li>服务计量管理</li>
+<li>服务质量管理</li>
+<li>服务交付管理</li>
+<li>系统管理</li>
+<li>管理集成</li>
+<li>管理门户</li>
+</ol>
+<h2 id="二、核心内容篇"><a href="#二、核心内容篇" class="headerlink" title="二、核心内容篇"></a>二、核心内容篇</h2><h3 id="第-3-章：信息系统设施运维"><a href="#第-3-章：信息系统设施运维" class="headerlink" title="第 3 章：信息系统设施运维"></a>第 3 章：信息系统设施运维</h3><h4 id="3-1-信息系统设施的管理体系"><a href="#3-1-信息系统设施的管理体系" class="headerlink" title="3.1 信息系统设施的管理体系"></a>3.1 信息系统设施的管理体系</h4><ol>
+<li>信息系统设施运维的对象</li>
+</ol>
+<ul>
+<li>（1）基础环境</li>
+<li>（2）网络</li>
+<li>（3）硬件</li>
+<li>（4）基础软件</li>
+</ul>
+<ol start="2">
+<li>信息系统设施运维的内容</li>
+<li>信息系统设施运维的制度</li>
+<li>信息系统设施运维的人员</li>
+</ol>
+<h4 id="3-2-信息系统设施运维的内容"><a href="#3-2-信息系统设施运维的内容" class="headerlink" title="3.2 信息系统设施运维的内容"></a>3.2 信息系统设施运维的内容</h4><h5 id="3-2-1-例行操作运维"><a href="#3-2-1-例行操作运维" class="headerlink" title="3.2.1 例行操作运维"></a>3.2.1 例行操作运维</h5><ol>
+<li>设施监控</li>
+</ol>
+<ul>
+<li>1）基础设施的监控</li>
+</ul>
+<ul>
+<li><p>2）网络设施的监控</p>
+<ul>
+<li>（1）网络拓扑监控</li>
+<li>（2）网络设备监控</li>
+<li>（3）网络链路监控</li>
+<li>（4）网络设备端口监控</li>
+</ul>
+</li>
+<li><p>3）硬件设施的监控</p>
+<ul>
+<li>（1）状态监控</li>
+<li>（2）性能监控</li>
+<li>（3）可用性监控</li>
+</ul>
+</li>
+<li><p>4）基础软件的监控</p>
+<ul>
+<li>（1）数据库监控</li>
+<li>（2）中间件监控</li>
+<li>（3）应用服务监控</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p>预防性检查</p>
+<ul>
+<li>（1）基础设施的预防性检查</li>
+<li>（2）网络设施的预防性检查</li>
+<li>（3）硬件设施的预防性检查</li>
+<li>（4）基础软件的预防性检查</li>
+</ul>
+</li>
+<li><p>常规操作</p>
+</li>
+</ol>
+<ul>
+<li><p>1）基础环境的常规操作</p>
+<ul>
+<li>（1）基础类操作</li>
+<li>（2）测试类操作</li>
+<li>（3）数据类操作</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2）网络设施的常规操作</li>
+<li>3）硬件设施的常规操作</li>
+<li>4）基础软件的常规操作</li>
+</ul>
+<h5 id="3-2-2-响应支持运维"><a href="#3-2-2-响应支持运维" class="headerlink" title="3.2.2 响应支持运维"></a>3.2.2 响应支持运维</h5><ol>
+<li>事件驱动响应</li>
+</ol>
+<ul>
+<li><p>1）基础设施的事件驱动响应</p>
+<ul>
+<li>（1）空调系统</li>
+<li>（2）供配电系统</li>
+<li>（3）发电机</li>
+<li>（4）UPS 系统</li>
+<li>（5）消防系统</li>
+<li>（6）安全系统</li>
+</ul>
+</li>
+<li><p>2）网络设施的事件驱动响应</p>
+</li>
+<li>3）硬件设施的事件驱动响应</li>
+<li>4）基础软件的事件驱动响应</li>
+</ul>
+<ol start="2">
+<li>服务请求响应</li>
+</ol>
+<ul>
+<li>1）基础设施的服务请求响应<ul>
+<li>（1）空调系统</li>
+<li>（2）供配电系统</li>
+<li>（3）发电机</li>
+<li>（4）UPS 系统</li>
+<li>（5）消防系统</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2）网络设施的服务请求响应</li>
+<li>3）硬件设施的服务请求响应</li>
+<li>4）基础软件的服务请求响应</li>
+</ul>
+<ol start="3">
+<li>应急响应</li>
+</ol>
+<ul>
+<li>1）应急准备<ul>
+<li>（1）建立应急管理的组织和制度</li>
+<li>（2）风险评估与改进</li>
+<li>（3）应急事件级别划分</li>
+<li>（4）预案制定</li>
+<li>（5）培训与演练</li>
+</ul>
+</li>
+<li>2）监测与预警<ul>
+<li>（1）日常监测与预警</li>
+<li>（2）记录与报告</li>
+<li>（3）核实与评估</li>
+<li>（4）预案启动</li>
+</ul>
+</li>
+<li>3）应急处理<ul>
+<li>（1）应急调度</li>
+<li>（2）排查与诊断</li>
+<li>（3）处理与恢复</li>
+<li>（4）升级与信息通报</li>
+<li>（5）持续服务与评价</li>
+<li>（6）事件关闭</li>
+</ul>
+</li>
+<li>4）总结改进<ul>
+<li>（1）应急事件总结<ul>
+<li>调查和取证</li>
+</ul>
+</li>
+<li>（2）应急体系的保持<ul>
+<li>体系维护</li>
+<li>体系审核</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>（3）应急准备工作的改进</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-2-3-优化改善运维"><a href="#3-2-3-优化改善运维" class="headerlink" title="3.2.3 优化改善运维"></a>3.2.3 优化改善运维</h5><ol>
+<li>适应性改进</li>
+</ol>
+<ul>
+<li><p>1）基础设施的适应性改进</p>
+<ul>
+<li>（1）空调系统</li>
+<li>（2）供配电系统</li>
+<li>（3）发电机</li>
+<li>（4）安全系统</li>
+</ul>
+</li>
+<li><p>2）网络设施的适应性改进</p>
+</li>
+<li>3）硬件设施的适应性改进</li>
+<li>4）基础软件的适应性改进</li>
+</ul>
+<ol start="2">
+<li>纠正性运维</li>
+</ol>
+<ul>
+<li><p>1）基础设施的纠正性运维</p>
+<ul>
+<li>（1）空调系统</li>
+<li>（2）供配电系统</li>
+<li>（4）安全系统</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>2）网络设施的适应性改进</li>
+<li>3）硬件设施的适应性改进</li>
+<li>4）基础软件的适应性改进</li>
+</ul>
+<ol start="3">
+<li>改善性运维</li>
+</ol>
+<h2 id="三、应用案例篇"><a href="#三、应用案例篇" class="headerlink" title="三、应用案例篇"></a>三、应用案例篇</h2><p>…</p>
+<p><em>XMind: ZEN - Trial Version</em></p>
+
+
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-----本文结束 <i class="fa fa-code ashen-margin-lr-4"></i> 感谢阅读-----</div>
+    
+</div>
+      </div>
+       
+    </div>
+
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_wechatpay.jpg" alt="阿沈是也 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_alipay.jpg" alt="阿沈是也 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>阿沈是也
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/读书笔记/20180913-6cb531db.html" title="信息系统运行与维护">http://yoursite.com/读书笔记/20180913-6cb531db.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/PHP/20180912-804e246c.html" rel="prev" title="PHP和Mysql Web开发">
+      <i class="fa fa-chevron-left"></i> PHP和Mysql Web开发
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/网络安全/20190225-2df38590.html" rel="next" title="WeBug3.0练习笔记">
+      WeBug3.0练习笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信息系统运行与维护"><span class="nav-number">1.</span> <span class="nav-text">信息系统运行与维护</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、基础概念篇"><span class="nav-number">1.1.</span> <span class="nav-text">一、基础概念篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第-1-章：信息系统运维概述"><span class="nav-number">1.1.1.</span> <span class="nav-text">第 1 章：信息系统运维概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-信息系统概述"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">1.1 信息系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-1-信息系统"><span class="nav-number">1.1.1.1.1.</span> <span class="nav-text">1.1.1 信息系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-2-信息系统的影响因素"><span class="nav-number">1.1.1.1.2.</span> <span class="nav-text">1.1.2 信息系统的影响因素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-信息系统运维"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">1.2 信息系统运维</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-1-信息系统运维的概念"><span class="nav-number">1.1.1.2.1.</span> <span class="nav-text">1.2.1 信息系统运维的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-2-信息系统运维的框架"><span class="nav-number">1.1.1.2.2.</span> <span class="nav-text">1.2.2 信息系统运维的框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-3-信息系统运维的要求"><span class="nav-number">1.1.1.2.3.</span> <span class="nav-text">1.2.3 信息系统运维的要求</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-信息系统运维的发展"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">1.3 信息系统运维的发展</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-1-信息系统运维的发展现状"><span class="nav-number">1.1.1.3.1.</span> <span class="nav-text">1.3.1 信息系统运维的发展现状</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-2-信息系统运维的发展阶段"><span class="nav-number">1.1.1.3.2.</span> <span class="nav-text">1.3.2 信息系统运维的发展阶段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-3-信息系统运维的发展趋势"><span class="nav-number">1.1.1.3.3.</span> <span class="nav-text">1.3.3 信息系统运维的发展趋势</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第-2-章：信息系统运维的组织与管理"><span class="nav-number">1.1.2.</span> <span class="nav-text">第 2 章：信息系统运维的组织与管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-信息系统运维的管理"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">2.1 信息系统运维的管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-1-信息系统运维管理体系框架"><span class="nav-number">1.1.2.1.1.</span> <span class="nav-text">2.1.1 信息系统运维管理体系框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-2-信息系统运维管理主要流程"><span class="nav-number">1.1.2.1.2.</span> <span class="nav-text">2.1.2 信息系统运维管理主要流程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-3-信息系统运维管理制度"><span class="nav-number">1.1.2.1.3.</span> <span class="nav-text">2.1.3 信息系统运维管理制度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-4-信息系统运维管理系统与专用工具"><span class="nav-number">1.1.2.1.4.</span> <span class="nav-text">2.1.4 信息系统运维管理系统与专用工具</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-信息系统运维的组织"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">2.2 信息系统运维的组织</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-1-信息系统运维的任务"><span class="nav-number">1.1.2.2.1.</span> <span class="nav-text">2.2.1 信息系统运维的任务</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-2-信息系统运维管理的职责"><span class="nav-number">1.1.2.2.2.</span> <span class="nav-text">2.2.2 信息系统运维管理的职责</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-信息系统运维人员的管理"><span class="nav-number">1.1.2.2.3.</span> <span class="nav-text">2.2.3 信息系统运维人员的管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-4-信息系统的运维模式"><span class="nav-number">1.1.2.2.4.</span> <span class="nav-text">2.2.4 信息系统的运维模式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-信息系统运维的外包"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">2.3 信息系统运维的外包</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-1-信息系统运维外包的概念"><span class="nav-number">1.1.2.3.1.</span> <span class="nav-text">2.3.1 信息系统运维外包的概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-2-信息系统运维外包的模式"><span class="nav-number">1.1.2.3.2.</span> <span class="nav-text">2.3.2 信息系统运维外包的模式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-3-信息系统运维外包的内容"><span class="nav-number">1.1.2.3.3.</span> <span class="nav-text">2.3.3 信息系统运维外包的内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-3-4-信息系统运维外包的风险管理"><span class="nav-number">1.1.2.3.4.</span> <span class="nav-text">2.3.4 信息系统运维外包的风险管理</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-信息系统运维管理标准"><span class="nav-number">1.1.2.4.</span> <span class="nav-text">2.4 信息系统运维管理标准</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-1“ITIL”"><span class="nav-number">1.1.2.4.1.</span> <span class="nav-text">2.4.1“ITIL”</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-4-2“COBIT”"><span class="nav-number">1.1.2.4.2.</span> <span class="nav-text">2.4.2“COBIT”</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-5-信息系统运维管理系统与专用工具"><span class="nav-number">1.1.2.5.</span> <span class="nav-text">2.5 信息系统运维管理系统与专用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-1-信息系统运维管理系统功能框架"><span class="nav-number">1.1.2.5.1.</span> <span class="nav-text">2.5.1 信息系统运维管理系统功能框架</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-2-运维管理系统"><span class="nav-number">1.1.2.5.2.</span> <span class="nav-text">2.5.2 运维管理系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5-3-运维管理专用工具"><span class="nav-number">1.1.2.5.3.</span> <span class="nav-text">2.5.3 运维管理专用工具</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-6-信息系统运维管理的发展–云运维管理"><span class="nav-number">1.1.2.6.</span> <span class="nav-text">2.6 信息系统运维管理的发展–云运维管理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-6-1-云运维管理概述"><span class="nav-number">1.1.2.6.1.</span> <span class="nav-text">2.6.1 云运维管理概述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-6-2-云运维管理的功能"><span class="nav-number">1.1.2.6.2.</span> <span class="nav-text">2.6.2 云运维管理的功能</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、核心内容篇"><span class="nav-number">1.2.</span> <span class="nav-text">二、核心内容篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第-3-章：信息系统设施运维"><span class="nav-number">1.2.1.</span> <span class="nav-text">第 3 章：信息系统设施运维</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-信息系统设施的管理体系"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">3.1 信息系统设施的管理体系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-信息系统设施运维的内容"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">3.2 信息系统设施运维的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-例行操作运维"><span class="nav-number">1.2.1.2.1.</span> <span class="nav-text">3.2.1 例行操作运维</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-2-响应支持运维"><span class="nav-number">1.2.1.2.2.</span> <span class="nav-text">3.2.2 响应支持运维</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-3-优化改善运维"><span class="nav-number">1.2.1.2.3.</span> <span class="nav-text">3.2.3 优化改善运维</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、应用案例篇"><span class="nav-number">1.3.</span> <span class="nav-text">三、应用案例篇</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿沈是也" src="/images/ashen_head.jpg">
+  <p class="site-author-name" itemprop="name">阿沈是也</p>
+  <div class="site-description" itemprop="description">程序员笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ashen114" title="GitHub → https://github.com/ashen114" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1215772764@qq.com" title="E-Mail → mailto:1215772764@qq.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿沈是也</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:24</span>
+</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+<!-- 在网页底部添加网站运行时间 -->
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+</div>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/25/2020 17:59:09");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "自建站已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'z262SSq7M28bIiXvnwKOhrnD-gzGzoHsz',
+      appKey     : 'KedMI8KD71pGhDYdgR4KGQMm',
+      placeholder: "欢迎留言...",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

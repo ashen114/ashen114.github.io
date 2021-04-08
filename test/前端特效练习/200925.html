@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+<script>
+// 在github环境下出错，待处理
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Mfs-701ND1wnyMF5ggu23Tkl7PrRR-op_fhel6D0E4I">
+  <meta name="baidu-site-verification" content="V9pGumsldr">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+  <meta name="description" content="Document                 $(document).mousemove(function (e) {         var x = e.pageX;         var y = e.pageY;         $(&quot;.light&quot;).css(           &quot;background-image&quot;,           `rad">
+<meta name="keywords" content="前端,后端,阿沈,Ashen114,阿沈的博客,个人博客,博客,Vue,Node,js,JavaScript,ts,typeScript">
+<meta property="og:type" content="website">
+<meta property="og:title" content="阿沈是也">
+<meta property="og:url" content="http://yoursite.com/test/前端特效练习/200925.html">
+<meta property="og:site_name" content="阿沈是也">
+<meta property="og:description" content="Document                 $(document).mousemove(function (e) {         var x = e.pageX;         var y = e.pageY;         $(&quot;.light&quot;).css(           &quot;background-image&quot;,           `rad">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601054604779&di=e7c4f6688a86e8a4eb9d9ae938dbe0d3&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180701%2Fb55dd6125e574b98a5ae7e5781cc4fd2.jpeg">
+<meta property="og:updated_time" content="2021-04-08T03:18:06.942Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="阿沈是也">
+<meta name="twitter:description" content="Document                 $(document).mousemove(function (e) {         var x = e.pageX;         var y = e.pageY;         $(&quot;.light&quot;).css(           &quot;background-image&quot;,           `rad">
+<meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601054604779&di=e7c4f6688a86e8a4eb9d9ae938dbe0d3&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180701%2Fb55dd6125e574b98a5ae7e5781cc4fd2.jpeg">
+
+<link rel="canonical" href="http://yoursite.com/test/前端特效练习/200925.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: false
+  };
+</script>
+
+  <title> | 阿沈是也
+  </title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c37fb4ddbdd4a0d7c4aedec4db3f9cb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+<script src="/js/photoswipe.min.js?v={{ theme.version }}"></script><script src="/js/photoswipe-ui-default.min.js?v={{ theme.version }}"></script>
+  <!--
+    <script src="/js/src/photoswipe.min.js?v="></script>
+    <script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+  -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿沈是也</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">敲代码中...</h1>
+      
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-fw fa-music"></i>歌单</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos" rel="section"><i class="fa fa-fw fa-camera"></i>照片墙</a>
+
+  </li>
+        <li class="menu-item menu-item-hot">
+
+    <a href="/hot/" rel="section"><i class="fa fa-fw fa-signal"></i>热度排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    
+    
+    
+
+    <main class="main as-main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+  
+  
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+    
+    
+    
+    <div class="post-block" lang="zh-CN">
+      <header class="post-header">
+
+<h2 class="post-title" itemprop="name headline">
+</h2>
+
+<div class="post-meta">
+  
+  <ul class="breadcrumb">
+          
+            <li><a href="/test/">TEST</a></li>
+            <li><a href="/test/前端特效练习/">前端特效练习</a></li>
+            <li>200925</li>
+          
+  </ul>
+
+</div>
+
+</header>
+
+      
+      
+      
+      <div class="post-body">
+          <!DOCTYPE html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script>
+      $(document).mousemove(function (e) {
+        var x = e.pageX;
+        var y = e.pageY;
+        $(".light").css(
+          "background-image",
+          `radial-gradient(circle at ${x}px ${y}px, transparent, #000 30%`
+        );
+      });
+    </script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .light {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .content {
+        position: relative;
+        width: 100%;
+        min-height: 100vh;
+        background-color: #000;
+        padding: 2em;
+        text-align: center;
+      }
+      .content h2 {
+        color: #fff;
+        font-size: 4em;
+        line-height: 2em;
+      }
+      .content p {
+        color: #fff;
+        text-align: left;
+        text-indent: 2em;
+        font-size: 1.2em;
+        line-height: 2em;
+        font-weight: 300;
+      }
+      .content img {
+        max-width: 100%;
+        margin: 50px 0 0;
+      }
+    </style>
+  <link rel="alternate" href="/atom.xml" title="阿沈是也" type="application/atom+xml">
+</head>
+  <body>
+    <div class="content">
+      <div class="light"></div>
+      <h2>聚光灯特效</h2>
+      <p>
+        中国共产党的诞生是中国革命发展的客观需要，是马克思主义同中国工人运动相结合的产物。1840年鸦片战争以后，国际资本主义、帝国主义的势力侵入中国，中国的社会结构由封建社会逐步演变为半殖民地半封建社会。从鸦片战争到五四运动，中国人民为了反对帝国主义和封建统治进行了英勇不屈的斗争，其中主要的是太平天国农民战争和资产阶级领导的辛亥革命，但都相继失败了。历史证明，中国的农民阶级和民族资产阶级由于他们的历史局限性和阶级局限性，都不能领导民主革命取得胜利。
+      </p>
+      <p>
+        随着帝国主义的入侵和现代工业的发展，中国产生了无产阶级，而且在不断发展壮大，到1919年产业工人已经发展到200万人左右。无产阶级的产生和发展，为中国共产党的建立奠定了阶级基础。1917年俄国十月革命的胜利给中国送来了马克思列宁主义，使中国的先进分子找到了救国救民的真理。马克思列宁主义在中国的广泛传播，为中国共产党的建立奠定了思想基础。1919年爆发的五四运动，促进了马克思主义同中国工人运动的结合，为中国共产党的建立作了思想上和干部上的准备。
+      </p>
+      <p>
+        1920年初，李大钊、陈独秀等开始了建党的探索和酝酿。4月，俄共（布）西伯利亚局派维经斯基等一行来华，了解中国情况，考察能否在上海建立共产国际东亚书记处。他们先在北京会见了李大钊，后由李大钊介绍到上海会见陈独秀，共同商谈讨论了建党问题，促进了中国共产党的创立。从5月开始，陈独秀邀约李汉俊、李达、俞秀松等人多次商谈建党的问题。8月，陈独秀在上海成立了中国共产党的发起组。10月，李大钊在北京建立了共产主义小组。接着，在湖南、湖北、山东、广东等地相继建立了党的早期组织，同时在法国和日本也由留学生中的先进分子组成了党的早期组织。这些组织当时叫法不一，有的叫共产党，有的则称共产党小组或支部，由于它们性质相同，因此，后来统称它们为各地共产主义小组。
+      </p>
+      <p>
+        各地共产主义小组建立以后，开展了多方面的革命活动。为了广泛传播马克思列宁主义，统一建党思想，1920年9月，上海发起组把《新青年》杂志（从八卷一号开始）改为党的公开刊物；同年11月，又创办了《共产党》月刊，在全国主要城市秘密发行，这是中国共产党历史上第一个党刊。新青年出版社还翻译出版了《共产党宣言》、《国家与革命》等马克思列宁主义经典著作，以及多种宣传马克思主义的通俗小册子。各地共产主义小组又创办了一批面向工人的通俗刊物，在上海有《劳动界》，北京有《劳动音》和《工人月刊》，济南有《济南劳动月刊》，广州有《劳动者》等，对工人进行阶级意识的启蒙教育。在此基础上，各地共产主义小组积极深入工人群众，举办工人夜校，建立工会组织。各地还建立了社会主义青年团，发展了一批团员，青年团成为党的有力助手和后备军。
+      </p>
+      <p>
+        1921年3月，在俄共远东局和共产国际的建议和支持下，召开了各共产主义小组的代表会议，发表了关于党的宗旨和原则的宣言，并制定了临时性的纲领，确立了党的工作机构和工作计划，表明了党组织对社会主义青年团、工会、行会、文化教育团体和军队的态度。这次会议为党的成立作了必要的准备。维经斯基回国不久，1921年6月，共产国际派马林等到上海。他们建议召开党的全国代表大会，正式成立中国共产党。上海党的发起组在李达的主持下进行了全国代表大会的筹备工作，并向各地党的组织写信发出通知，要求各地选派两名代表出席大会。来自北京、汉口、广州、长沙、济南和日本的各地代表7月23日全部到达上海。
+      </p>
+      <p>
+        1921年7月23日—31日，在上海召开了中国共产党的第一次全国代表大会。1921年7月23日，中共一大在上海秘密召开。因突遭法国巡捕搜查，会议被迫休会。7月底，中共一大代表毛泽东、董必武、陈潭秋、王尽美、邓恩铭、李达等，由李达夫人王会悟做向导，从上海乘火车转移到嘉兴，再从狮子汇渡口登上渡船到湖心岛，最后转登王会悟预订的游船，并在游船中庄严宣告中国共产党的诞生。在船上，中共一大通过了党的第一个纲领和决议，正式宣告中国共产党庄严诞生。
+        纲领规定：党的名称是“中国共产党”；党的性质是无产阶级政党；党的奋斗目标是推翻资产阶级，废除资本所有制，建立无产阶级专政，实现社会主义和共产主义；党的基本任务是从事工人运动的各项活动，加强对工会和工人运动的研究与领导。大会选举产生党的领导机构——中央局，陈独秀为书记，张国焘负责组织，李达负责宣传。
+      </p>
+      <p>
+        党的一大宣告了中国共产党的正式成立。从此，中国诞生了完全新式的、以共产主义为目的、以马列主义为行动指南的、统一的工人阶级政党。中国共产党的成立，给灾难深重的中国人民带来了光明和希望，给中国革命指明了方向。正如毛泽东所说的那样，中国共产党的成立，是一个开天辟地的大事变。中国共产党成立后，中国革命的面目就为之一新了。
+      </p>
+      <p>
+        由于党的“一大”召开于7月，而在战争年代档案资料难寻，具体开幕日期无法查证，因此，1941年6月在党成立20周年之际，中共中央发文正式规定，7月1日为党的诞生纪念日。
+      </p>
+      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1601054604779&di=e7c4f6688a86e8a4eb9d9ae938dbe0d3&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180701%2Fb55dd6125e574b98a5ae7e5781cc4fd2.jpeg" alt srcset>
+    </div>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
+
+      </div>
+      
+      
+      
+    </div>
+    
+  <ul class="breadcrumb">
+          
+            <li><a href="/test/">TEST</a></li>
+            <li><a href="/test/前端特效练习/">前端特效练习</a></li>
+            <li>200925</li>
+          
+  </ul>
+
+    
+    
+    
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">聚光灯特效</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿沈是也" src="/images/ashen_head.jpg">
+  <p class="site-author-name" itemprop="name">阿沈是也</p>
+  <div class="site-description" itemprop="description">程序员笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ashen114" title="GitHub → https://github.com/ashen114" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1215772764@qq.com" title="E-Mail → mailto:1215772764@qq.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿沈是也</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:24</span>
+</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+<!-- 在网页底部添加网站运行时间 -->
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+</div>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/25/2020 17:59:09");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "自建站已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'z262SSq7M28bIiXvnwKOhrnD-gzGzoHsz',
+      appKey     : 'KedMI8KD71pGhDYdgR4KGQMm',
+      placeholder: "欢迎留言...",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+<script>
+// 在github环境下出错，待处理
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+<script src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+<link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="Mfs-701ND1wnyMF5ggu23Tkl7PrRR-op_fhel6D0E4I">
+  <meta name="baidu-site-verification" content="V9pGumsldr">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Gemini","version":"7.7.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"default"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+
+<style>
+    .pace .pace-progress {
+        background: #1E92FB; /*进度条颜色*/
+        height: 3px;
+    }
+    .pace .pace-progress-inner {
+         box-shadow: 0 0 10px #1E92FB, 0 0 5px     #1E92FB; /*阴影颜色*/
+    }
+    .pace .pace-activity {
+        border-top-color: #1E92FB;    /*上边框颜色*/
+        border-left-color: #1E92FB;    /*左边框颜色*/
+    }
+</style>
+  <meta name="description" content="Vue源码解读：https://github.com/ashen114/CodingFun/blob/master/sourceCode/vue.js  比较习惯先看整体再到部分，因此从整体入手，逐步拜读 Vue 源码，学艺不精，若有理解错误之处，恳请指点。  研究对象1234567(function (global, factory) &amp;#123;  // 检测上下文环境是否为Node  typ">
+<meta name="keywords" content="笔记,Vue源码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue源码研读笔记">
+<meta property="og:url" content="http://yoursite.com/Vue/20200228-5414158b.html">
+<meta property="og:site_name" content="阿沈是也">
+<meta property="og:description" content="Vue源码解读：https://github.com/ashen114/CodingFun/blob/master/sourceCode/vue.js  比较习惯先看整体再到部分，因此从整体入手，逐步拜读 Vue 源码，学艺不精，若有理解错误之处，恳请指点。  研究对象1234567(function (global, factory) &amp;#123;  // 检测上下文环境是否为Node  typ">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/images/2019-12-18-20-26-47.png">
+<meta property="og:image" content="http://yoursite.com/images/2019-12-18-20-27-59.png">
+<meta property="og:updated_time" content="2021-04-08T03:18:06.359Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue源码研读笔记">
+<meta name="twitter:description" content="Vue源码解读：https://github.com/ashen114/CodingFun/blob/master/sourceCode/vue.js  比较习惯先看整体再到部分，因此从整体入手，逐步拜读 Vue 源码，学艺不精，若有理解错误之处，恳请指点。  研究对象1234567(function (global, factory) &amp;#123;  // 检测上下文环境是否为Node  typ">
+<meta name="twitter:image" content="http://yoursite.com/images/2019-12-18-20-26-47.png">
+
+<link rel="canonical" href="http://yoursite.com/Vue/20200228-5414158b.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>Vue源码研读笔记 | 阿沈是也</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?c37fb4ddbdd4a0d7c4aedec4db3f9cb2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+<script src="/js/photoswipe.min.js?v={{ theme.version }}"></script><script src="/js/photoswipe-ui-default.min.js?v={{ theme.version }}"></script>
+  <!--
+    <script src="/js/src/photoswipe.min.js?v="></script>
+    <script src="/js/src/photoswipe-ui-default.min.js?v="></script>
+  -->
+<link rel="alternate" href="/atom.xml" title="阿沈是也" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">阿沈是也</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">敲代码中...</h1>
+      
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="fa fa-fw fa-music"></i>歌单</a>
+
+  </li>
+        <li class="menu-item menu-item-photos">
+
+    <a href="/photos" rel="section"><i class="fa fa-fw fa-camera"></i>照片墙</a>
+
+  </li>
+        <li class="menu-item menu-item-hot">
+
+    <a href="/hot/" rel="section"><i class="fa fa-fw fa-signal"></i>热度排行</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档<span class="badge">18</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">16</span></a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">29</span></a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-fw fa-sitemap"></i>站点地图</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="off" placeholder="搜索..." spellcheck="false" type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    
+    
+    
+
+    <main class="main as-main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Vue/20200228-5414158b.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ashen_head.jpg">
+      <meta itemprop="name" content="阿沈是也">
+      <meta itemprop="description" content="程序员笔记">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="阿沈是也">
+    </span>
+      <header class="post-header">
+
+      
+
+
+        <h2 class="post-title" itemprop="name headline">
+          Vue源码研读笔记
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-28 15:51:02" itemprop="dateCreated datePublished" datetime="2020-02-28T15:51:02+08:00">2020-02-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-08 11:18:06" itemprop="dateModified" datetime="2021-04-08T11:18:06+08:00">2021-04-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
+                </span>
+            </span>
+
+          
+                 
+            <span id="/Vue/20200228-5414158b.html" class="post-meta-item leancloud_visitors" data-flag-title="Vue源码研读笔记" title="阅读数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读数：</span>
+              <span class="leancloud-visitors-count"></span>
+             <!-- <span>次</span> -->
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">评论数：</span>
+    
+    <a title="valine" href="/Vue/20200228-5414158b.html#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/Vue/20200228-5414158b.html" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>16k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>14 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+
+          
+
+        
+      <!-- 文章正文内容 -->
+        <h1 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h1><p>源码解读：<a href="https://github.com/ashen114/CodingFun/blob/master/sourceCode/vue.js" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/ashen114/CodingFun/blob/master/sourceCode/vue.js</a></p>
+<blockquote>
+<p>比较习惯先看整体再到部分，因此从整体入手，逐步拜读 Vue 源码，学艺不精，若有理解错误之处，恳请指点。</p>
+</blockquote>
+<h2 id="研究对象"><a href="#研究对象" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">global, factory</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 检测上下文环境是否为Node</span></span><br><span class="line">  <span class="keyword">typeof</span> exports === <span class="string">'object'</span> &amp;&amp; <span class="keyword">typeof</span> <span class="built_in">module</span> !== <span class="string">'undefined'</span> ? <span class="built_in">module</span>.exports = factory() :</span><br><span class="line">  <span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd ? define(factory) :</span><br><span class="line">  (global = global || self, global.Vue = factory());</span><br><span class="line">&#125;(<span class="keyword">this</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123; ...</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>参考链接：<a href="https://www.iteye.com/blog/zccst-2215317" rel="external nofollow noopener noreferrer" target="_blank">https://www.iteye.com/blog/zccst-2215317</a> <a href="https://www.jianshu.com/p/013b37a677f0" rel="external nofollow noopener noreferrer" target="_blank">https://www.jianshu.com/p/013b37a677f0</a><br>CommonJS 用在服务器端，同步的，例如 nodejs<br>AMD,CMD 用于浏览器端，异步，例如 request 和 seajs</p>
+</blockquote>
+<h3 id="CommonJS"><a href="#CommonJS" class="headerlink" title="CommonJS"></a>CommonJS</h3><p>根据 CommonJS 规范，一个单独的文件就是一个模块。加载模块使用 require 方法，该方法读取一个文件并执行，最后返回文件内部的 exports 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//exports对象上的方法和变量是公有的</span></span><br><span class="line"><span class="keyword">var</span> foobar = <span class="keyword">new</span> foobar();</span><br><span class="line">exports.foobar = foobar;</span><br><span class="line"></span><br><span class="line"><span class="comment">//require方法默认读取js文件，所以可以省略js后缀</span></span><br><span class="line"><span class="keyword">var</span> test = <span class="built_in">require</span>(<span class="string">"./boobar"</span>).foobar;</span><br><span class="line"></span><br><span class="line">test.bar();</span><br></pre></td></tr></table></figure>
+<p>CommonJS 加载模块是同步的，所以只有加载完成才能执行后面的操作。像 Node.js 主要用于服务器的编程，加载的模块文件一般都已经存在本地硬盘，所以加载起来比较快，不用考虑异步加载的方式，所以 CommonJS 规范比较适用。但如果是浏览器环境，要从服务器加载模块，这是就必须采用异步模式。所以就有了 AMD CMD 解决方案。</p>
+<h3 id="AMD"><a href="#AMD" class="headerlink" title="AMD"></a>AMD</h3><p>AMD 是 RequireJS 在推广过程中对模块定义的规范化产出<br>AMD 异步加载模块。它的模块支持对象 函数 构造器 字符串 JSON 等各种类型的模块。<br>适用 AMD 规范适用 define 方法定义模块。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过数组引入依赖 ，回调函数通过形参传入依赖</span></span><br><span class="line">define([<span class="string">'someModule1'</span>, ‘someModule2’], <span class="function"><span class="keyword">function</span> (<span class="params">someModule1, someModule2</span>) </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="comment">/// someing</span></span><br><span class="line">        someModule1.test();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="attr">foo</span>: foo&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>AMD 规范允许输出模块兼容 CommonJS 规范，这时 define 方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require, exports, module</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> reqModule = <span class="built_in">require</span>(<span class="string">"./someModule"</span>);</span><br><span class="line">  requModule.test();</span><br><span class="line">  exports.asplode = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">//someing</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h3><p>CMD 是 SeaJS 在推广过程中对模块定义的规范化产出</p>
+<p>CMD 和 AMD 的区别有以下几点：</p>
+<p>1.对于依赖的模块 AMD 是提前执行，CMD 是延迟执行。不过 RequireJS 从 2.0 开始，也改成可以延迟执行（根据写法不同，处理方式不通过）。</p>
+<p>2.CMD 推崇依赖就近，AMD 推崇依赖前置。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//AMD</span></span><br><span class="line">define([<span class="string">'./a'</span>,<span class="string">'./b'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//依赖一开始就写好</span></span><br><span class="line">    a.test();</span><br><span class="line">    b.test();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//CMD</span></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params">requie, exports, module</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//依赖可以就近书写</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">    a.test();</span><br><span class="line">    ...</span><br><span class="line">    <span class="comment">//软依赖</span></span><br><span class="line">    <span class="keyword">if</span> (status) &#123;</span><br><span class="line">        <span class="keyword">var</span> b = requie(<span class="string">'./b'</span>);</span><br><span class="line">        b.test();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>虽然 AMD 也支持 CMD 写法，但依赖前置是官方文档的默认模块定义写法。</p>
+<h3 id="seajs"><a href="#seajs" class="headerlink" title="seajs"></a>seajs</h3><p>1、引入 seajs<br>在文件夹中放入 seajs，相关的 html 页面引入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"yourfile/js/sea.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>2、seajs 经常使用的 api 有 use，config<br>seajs.use 主要用于载入入口模块。入口模块相当于 C 语言的 main 函数，同时也是整个模块依赖树的根。seajs.use 的用法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//第一模式</span></span><br><span class="line">seajs.use(<span class="string">"./a"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">//回调模式</span></span><br><span class="line">seajs.use(<span class="string">"./a"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">  a.run();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">//多模块模式</span></span><br><span class="line">seajs.use([<span class="string">"./a"</span>, <span class="string">"./b"</span>], <span class="function"><span class="keyword">function</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  a.run();</span><br><span class="line">  b.run();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>AMD 的 api 默认是一个当多个用，CMD 严格的区分推崇职责单一。例如：AMD 里 require 分全局的和局部的。CMD 里面没有全局的 require,提供 seajs.use()来实现模块系统的加载启动。CMD 里每个 API 都简单纯粹。<br>require 是 AMD 规范引入方式<br>import 是 es6 的一个语法标准，如果要兼容浏览器的话必须转化成 es5 的语法。</p>
+<blockquote>
+<p>参考链接：<a href="https://www.cnblogs.com/xiaobai110/p/6654522.html" rel="external nofollow noopener noreferrer" target="_blank">RequireJS、SeaJS 的区别</a></p>
+</blockquote>
+<h2 id="研究对象-1"><a href="#研究对象-1" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isPrimitive</span>(<span class="params">value</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">"string"</span> ||</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">"number"</span> ||</span><br><span class="line">    <span class="comment">// $flow-disable-line</span></span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">"symbol"</span> ||</span><br><span class="line">    <span class="keyword">typeof</span> value === <span class="string">"boolean"</span></span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>JavaScript 语言规定了 7 种语言类型，他们分别是：<br>Number（数字）<br>Boolean（布尔值）<br>String（字符串）<br>Null （空）<br>Undefined （未定义）<br>Symbol （es6 新增，表示独一无二的值）<br>Object（对象）<br>其中，除了 Object 是对象类型，其他的都是原始（基本）类型。</p>
+<h3 id="symbol"><a href="#symbol" class="headerlink" title="symbol"></a>symbol</h3><p>ES5 的对象属性名都是字符串，这就很容易造成属性名的冲突。为了防止属性名冲突，创建独一无二的变量名，在 ES6 中引入了 Symbol 基本数据类型。Symbol() 函数返回的是 Symbol 类型的值，该类型具有静态方法和静态属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Symbol</span>(<span class="string">"ashen"</span>) == <span class="built_in">Symbol</span>(<span class="string">"ashen"</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>借助该特性，可以将其作为对象的属性名，保证不会出现同名属性。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> name = <span class="built_in">Symbol</span>(<span class="string">"shen"</span>);</span><br><span class="line"><span class="keyword">let</span> a = &#123;&#125;;</span><br><span class="line">a[name] = <span class="string">"ashen"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> b = &#123;</span><br><span class="line">  [name]: <span class="string">"ashen"</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> c = &#123;&#125;;</span><br><span class="line"><span class="built_in">Object</span>.defineProperty(c, name, &#123; <span class="attr">value</span>: <span class="string">"ashen"</span> &#125;); <span class="comment">// c = &#123; Symbol(shen):"ashen" &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// a,b,c的值都为&#123;Symbol(shen): "ashen"&#125;,然而三者并不相等</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-2"><a href="#研究对象-2" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isValidArrayIndex</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> n = <span class="built_in">parseFloat</span>(<span class="built_in">String</span>(val));</span><br><span class="line">  <span class="keyword">return</span> n &gt;= <span class="number">0</span> &amp;&amp; <span class="built_in">Math</span>.floor(n) === n &amp;&amp; <span class="built_in">isFinite</span>(val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h3><p>isFinite(number) 是 JavaScript 内置函数，用于判断 number 对象是否可以转换成一个有限的数字。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isFinite</span>(<span class="number">123</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="string">"123"</span>); <span class="comment">// true</span></span><br><span class="line"><span class="built_in">isFinite</span>(<span class="string">"123a"</span>); <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="Math-对象"><a href="#Math-对象" class="headerlink" title="Math 对象"></a>Math 对象</h3><p>Math 对象用于执行数学任务。<br>Math 对象并不像 Date 和 String 那样是对象的类，因此没有构造函数 Math()。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="number">1234.567</span>); <span class="comment">// 向下取整数，得到123</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-3"><a href="#研究对象-3" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toString</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> val == <span class="literal">null</span></span><br><span class="line">    ? <span class="string">""</span> <span class="comment">// 若为null，则返回""</span></span><br><span class="line">    : <span class="built_in">Array</span>.isArray(val) || (isPlainObject(val) &amp;&amp; val.toString === _toString)</span><br><span class="line">    ? <span class="built_in">JSON</span>.stringify(val, <span class="literal">null</span>, <span class="number">2</span>)</span><br><span class="line">    : <span class="built_in">String</span>(val);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="类型判断"><a href="#类型判断" class="headerlink" title="类型判断"></a>类型判断</h2><p>判断数据是否为 array 数组类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="built_in">Array</span>.isArray(arr); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h2 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a>原型链</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _ArrtoString = <span class="built_in">Array</span>.prototype.toString;</span><br><span class="line"><span class="keyword">let</span> _ObjtoString = <span class="built_in">Object</span>.prototype.toString;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">"a"</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 可以用于判断数值是什么类型</span></span><br><span class="line">arr.toString == _ArrtoString; <span class="comment">// true</span></span><br><span class="line">arr.toString == _ObjtoString; <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">obj.toString == _ObjtoString; <span class="comment">// true</span></span><br><span class="line">obj.toString == _ArrtoString; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><h3 id="JSON-stringfy"><a href="#JSON-stringfy" class="headerlink" title="JSON.stringfy"></a>JSON.stringfy</h3><blockquote>
+<p>可以将对象转换为字符串<br>语法<br>JSON.stringify(value[, replacer[, space]])<br>参数说明：<br>value: 必需， 要转换的 JavaScript 值（通常为对象或数组）。<br>replacer: 可选。用于转换结果的函数或数组。如果 replacer 为函数，则 JSON.stringify 将调用该函数，并传入每个成员的键和值。使用返回值而不是原始值。如果此函数返回 undefined，则排除成员。根对象的键是一个空字符串：””。如果 replacer 是一个数组，则仅转换该数组中具有键值的成员。成员的转换顺序与键在数组中的顺序一样。当 value 参数也为数组时，将忽略 replacer 数组。<br>space:可选，文本添加缩进、空格和换行符，如果 space 是一个数字，则返回值文本在每个级别缩进指定数目的空格，如果 space 大于 10，则文本缩进 10 个空格。space 也可以使用非数字，如：\t。</p>
+</blockquote>
+<p><a href="https://baijiahao.baidu.com/s?id=1606340664976316132&amp;wfr=spider&amp;for=pc" rel="external nofollow noopener noreferrer" target="_blank">JSON.stringify 的使用细节</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> val = &#123; <span class="attr">name</span>: <span class="string">"ahsen"</span> &#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * val是原数据value;</span></span><br><span class="line"><span class="comment"> * null为用于转换结果的函数或数组replacer;</span></span><br><span class="line"><span class="comment"> * 2为分别前插入2个空格,若为字符串，则是分别前插入字符串...;</span></span><br><span class="line"><span class="comment"> **/</span></span><br><span class="line"><span class="built_in">JSON</span>.stringify(val, <span class="literal">null</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// 输出应为</span></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   name:'ashen'</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 其中null的用法可以有如下：</span></span><br><span class="line"><span class="comment">// 1. 通过函数处理数组(arr,function)</span></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>];</span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify(arr, changeArr); <span class="comment">// 得到 ""A,B""</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeArr</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// ["a","b"]</span></span><br><span class="line">  <span class="keyword">return</span> value.toString().toUpperCase(); <span class="comment">// 将value转为字符串"a,b" 然后转为大写"A,B"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 通过函数处理对象(obj,function)</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"ashen"</span>,</span><br><span class="line">  age: <span class="string">"18"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify(obj, changeObj); <span class="comment">// 得到""ASHEN""</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">changeObj</span>(<span class="params">key, value</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value); <span class="comment">// &#123; name:"ashen",age:"18" &#125;</span></span><br><span class="line">  <span class="keyword">return</span> value.name.toString().toUpperCase(); <span class="comment">//将value中的name的属性转为大写</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 通过数组与数组组合，结果第二个数组被忽略(arr1,arr2)</span></span><br><span class="line"><span class="keyword">let</span> arr1 = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="string">"d"</span>, <span class="string">"e"</span>];</span><br><span class="line"><span class="keyword">let</span> json = <span class="built_in">JSON</span>.stringify(arr1, arr2); <span class="comment">// 得到"["a","b","c"]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 4. 通过对象与数组结合，结果显示为若数组的值和对象的键都存在的，则保留，过滤掉两者不共同拥有的部分</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"ashen"</span>,</span><br><span class="line">  age: <span class="string">"18"</span>,</span><br><span class="line">  height: <span class="string">"180cm"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">"name"</span>, <span class="string">"age"</span>, <span class="string">"sex"</span>];</span><br><span class="line"><span class="keyword">let</span> json1 = <span class="built_in">JSON</span>.stringify(obj, arr); <span class="comment">// 得到 "&#123;"name":"ashen","age":"18"&#125;"  分析：由于arr中不存在height及obj中不存在sex，因此两者被过滤，剩下两者都存在的</span></span><br><span class="line"><span class="keyword">let</span> json2 = <span class="built_in">JSON</span>.stringify(arr, obj); <span class="comment">// 得到 "["name","age","sex"]" 结果和定义的arr一样</span></span><br></pre></td></tr></table></figure>
+<h3 id="String-val"><a href="#String-val" class="headerlink" title="String(val)"></a>String(val)</h3><p>适用于转换转换非对象类型的数据为字符串类型</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> num = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">String</span>(num); <span class="comment">// "1"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = [<span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span>];</span><br><span class="line"><span class="built_in">String</span>(arr); <span class="comment">// "a,b,c"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> obj = &#123;</span><br><span class="line">  name: <span class="string">"ashen"</span>,</span><br><span class="line">  age: <span class="string">"18"</span>,</span><br><span class="line">  height: <span class="string">"180cm"</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">String</span>(obj); <span class="comment">// "[object Object]" 对object对象类型转换达到的效果</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-4"><a href="#研究对象-4" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeMap</span>(<span class="params">str, expectsLowerCase</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> map = <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line">  <span class="keyword">var</span> list = str.split(<span class="string">","</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; list.length; i++) &#123;</span><br><span class="line">    map[list[i]] = <span class="literal">true</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> expectsLowerCase</span><br><span class="line">    ? <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 若expectsLowerCase存在且为true</span></span><br><span class="line">        <span class="keyword">return</span> map[val.toLowerCase()]; <span class="comment">// 则将键转为小写再返回map</span></span><br><span class="line">      &#125;</span><br><span class="line">    : <span class="function"><span class="keyword">function</span>(<span class="params">val</span>) </span>&#123;</span><br><span class="line">        <span class="comment">// 若expectsLowerCase不存在或者为false</span></span><br><span class="line">        <span class="keyword">return</span> map[val]; <span class="comment">// 则直接返回map</span></span><br><span class="line">      &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="柯里化函数"><a href="#柯里化函数" class="headerlink" title="柯里化函数"></a>柯里化函数</h2><p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ---普通版--</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">typeTest</span>(<span class="params">dataType, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(dataType, <span class="string">"gi"</span>).test(<span class="built_in">Object</span>.prototype.toString.call(obj));</span><br><span class="line">&#125;</span><br><span class="line">typeTest(<span class="string">"array"</span>, [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">typeTest(<span class="string">"array"</span>, <span class="string">"Hello"</span>); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">typeTest(<span class="string">"boolean"</span>, <span class="literal">true</span>); <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ---Currying柯里化---</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">typeTest</span>(<span class="params">dataType, obj</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">RegExp</span>(dataType, <span class="string">"gi"</span>).test(<span class="built_in">Object</span>.prototype.toString.call(obj));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//--第一种--</span></span><br><span class="line"><span class="keyword">var</span> isNum = (<span class="function"><span class="keyword">function</span>(<span class="params">type</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> typeTest(type, data);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)(<span class="string">"number"</span>); <span class="comment">// 'number'传递到type，函数实际接收的参数传递到data</span></span><br><span class="line"></span><br><span class="line">isNum(<span class="number">1</span>); <span class="comment">//true</span></span><br><span class="line">isNum([]); <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//--第二种--</span></span><br><span class="line"><span class="keyword">var</span> isArr = typeTest.bind(<span class="literal">null</span>, <span class="string">"array"</span>); <span class="comment">// typeTest('array',null) null.typeTest('array')</span></span><br><span class="line"></span><br><span class="line">isArr(<span class="number">1</span>); <span class="comment">//false</span></span><br><span class="line">isArr([]); <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-5"><a href="#研究对象-5" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 函数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param </span>fn 接收待缓存的函数</span></span><br><span class="line"><span class="comment"> * 此处主要应用了闭包的思想，</span></span><br><span class="line"><span class="comment"> * 例如：</span></span><br><span class="line"><span class="comment"> * var strFn = cached(function(str) &#123; return str &#125;)</span></span><br><span class="line"><span class="comment"> * var a = strFn('ashen') 结果为'ashen'，此时strFn会存起cachedFn，由于闭包作用，cache也会被缓存起来，此时,由于hit为undefined,因此cache['ashen'] = 'ashen'</span></span><br><span class="line"><span class="comment"> * var b = strFn('ashen') 此时strFn也会存起cachedFn，由于cache已经被缓存起来，因此，第二次调用的是第一次a缓存的strFn函数。var hit = cache[str]会等于'ashen'</span></span><br><span class="line"><span class="comment"> * var c = strFn('test') 此时第三次调用，调用的strFn还是上次缓存的cachedFn，因为cache['test']为undefined，因此再次cache['test'] = 'test'，外层的return cachedFn会被strFn缓存起来，其中的cache['test'] = 'test'也会被缓存起来，用于下次</span></span><br><span class="line"><span class="comment"> * 由于缓存的原因，var cache = Object.create(null); 只执行一次</span></span><br><span class="line"><span class="comment"> * 每次调用，上次的cache都被缓存起来</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cached</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = <span class="built_in">Object</span>.create(<span class="literal">null</span>); <span class="comment">// 创建空对象</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cachedFn</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 函数，接收fn中的str参数，闭包</span></span><br><span class="line">    <span class="keyword">var</span> hit = cache[str]; <span class="comment">// 将fn中的str参数....?</span></span><br><span class="line">    <span class="keyword">return</span> hit || (cache[str] = fn(str)); <span class="comment">// 若hit没有str属性和值，则赋予fn的返回数据作为值</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h3><p>例子 1</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * myFunc 是执行 makeFunc 时创建的 displayName 函数实例的引用，</span></span><br><span class="line"><span class="comment"> * 而 displayName 实例仍可访问其词法作用域中的变量，即可以访问到 name 。</span></span><br><span class="line"><span class="comment"> * 由此，当 myFunc 被调用时，name 仍可被访问，其值 Mozilla 就被传递到alert中。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> name = <span class="string">"Mozilla"</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">displayName</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(name);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> displayName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myFunc = makeFunc();</span><br><span class="line">myFunc(); <span class="comment">// 可以访问闭包的name</span></span><br></pre></td></tr></table></figure>
+<p>例子 2</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">makeAdder</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> x + y;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> add5 = makeAdder(<span class="number">5</span>);</span><br><span class="line"><span class="keyword">var</span> add10 = makeAdder(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add5(<span class="number">2</span>)); <span class="comment">// 7</span></span><br><span class="line"><span class="built_in">console</span>.log(add10(<span class="number">2</span>)); <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+<p>例子 3，<a href="./html/cached.html">对本次研究对象进行实例分析</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">cached</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = <span class="built_in">Object</span>.create(<span class="literal">null</span>); <span class="comment">// 创建空对象</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">cachedFn</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 函数，接收fn中的str参数</span></span><br><span class="line">    <span class="keyword">debugger</span>;</span><br><span class="line">    <span class="keyword">let</span> hit = cache[str]; <span class="comment">// 将fn中的str参数....?</span></span><br><span class="line">    <span class="keyword">debugger</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hit || (cache[str] = fn(str)); <span class="comment">// 若hit没有str属性和值，则赋予fn的返回数据作为值</span></span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> capitalize = cached(<span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">debugger</span>;</span><br><span class="line">  <span class="keyword">return</span> str.charAt(<span class="number">0</span>).toUpperCase() + str.slice(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = capitalize(<span class="string">"ahen"</span>); <span class="comment">// 调用了capitalize，capitalize实际存储起来的是cachedFn，因此，下次此时var capitalize = function cachedFn(str) &#123;let hit = cache[str]; return hit || (cache[str] = fn(str)); &#125;;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b = capitalize(<span class="string">"ahen"</span>); <span class="comment">// 由于上述capitalize实际是已经缓存起来了cachedFn，而且由于闭包的原因，cache实际上自从第一次被创建后，每次调用都会被str覆盖，除非上次的结果等于本次的属性。</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> c = capitalize(<span class="string">"ahen1"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> d = capitalize(<span class="string">"ahen2"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> e = capitalize(<span class="string">"ahen"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-6"><a href="#研究对象-6" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> camelizeRE = <span class="regexp">/-(\w)/g</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="正则表达式（待完善）"><a href="#正则表达式（待完善）" class="headerlink" title="正则表达式（待完善）"></a>正则表达式（待完善）</h3><p><a href="https://www.jianshu.com/p/488d60349325" rel="external nofollow noopener noreferrer" target="_blank">参考学习</a><br><a href="https://www.w3school.com.cn/js/js_regexp.asp" rel="external nofollow noopener noreferrer" target="_blank">参考文档</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"test123ABC"</span>;</span><br><span class="line"><span class="comment">// 1. 构造函数式声明</span></span><br><span class="line"><span class="keyword">let</span> patt1 = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">"\\d"</span>, <span class="string">"g"</span>); <span class="comment">// 需要使用\\d来表示 \d，若只使用\d或者d则会解析成/d/g，则表示只匹配字母d</span></span><br><span class="line">patt1.test(str); <span class="comment">// let patt1 = /\d/ 返回true，因为str含有123</span></span><br><span class="line">patt1.exec(str); <span class="comment">// 返回["1", index: 4, input: "test123ABC", groups: undefined]</span></span><br><span class="line">patt1.exec(str); <span class="comment">// 返回["2", index: 5, input: "test123ABC", groups: undefined]</span></span><br><span class="line">patt1.exec(str); <span class="comment">// 返回["3", index: 6, input: "test123ABC", groups: undefined]</span></span><br><span class="line">patt1.exec(str); <span class="comment">// 返回null</span></span><br></pre></td></tr></table></figure>
+<p>exec 例子：</p>
+<p><img src="/images/2019-12-18-20-26-47.png" alt="exec例子"></p>
+<p>exec 解释：<a href="https://www.w3school.com.cn/jsref/jsref_exec_regexp.asp" rel="external nofollow noopener noreferrer" target="_blank">参考文档</a></p>
+<p><img src="/images/2019-12-18-20-27-59.png" alt></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"test123ABC"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 字面量式声明</span></span><br><span class="line"><span class="keyword">let</span> patt1 = <span class="regexp">/\d/g</span>; <span class="comment">// 通过//符号作为开始结束，\d为元字符，表示匹配数字,g表示全局匹配</span></span><br><span class="line"></span><br><span class="line">str.match(patt1); <span class="comment">// 得到["1","2","3"]，若没有g，则得到["1", index: 4, input: "test123ABC", groups: undefined]，其中"1"表示匹配到的第一个数字，index则表示位置</span></span><br><span class="line">str.replace(patt1, <span class="string">"WK"</span>); <span class="comment">// 得到testWKWKWKABC，若没有g，则得到testWK23ABC</span></span><br><span class="line"><span class="comment">// 若为'v-for'.replace(patt1,function(a,b)&#123; return b &#125;)，其中a接收的是'-for',b接收的是'for',因为是replace，所以-for被替换，return b，则-for被替换为for，因此结果我vfor</span></span><br></pre></td></tr></table></figure>
+<h4 id="修饰符"><a href="#修饰符" class="headerlink" title="修饰符"></a>修饰符</h4><ul>
+<li>i 执行对大小写不敏感</li>
+<li>g 执行全局匹配</li>
+<li>m 执行多行匹配</li>
+</ul>
+<h4 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h4><blockquote>
+<p><code>[]</code> 匹配方括号内的任意字符，<code>()</code>类似将一个表达式闭包闭合起来</p>
+</blockquote>
+<ul>
+<li><code>[abc]</code> 匹配反括号之间的任何字符 例如：<code>&#39;ashen114&#39;.match(/[abcde]/g)</code>，得到<code>[&quot;a&quot;,&quot;e&quot;]</code>，</li>
+<li><code>[^abc]</code> 匹配不在方括号内的任意字符 例如：<code>&#39;ashen114&#39;.match(/[^abcde]/g)</code>，得到<code>[&quot;s&quot;,&quot;h&quot;,&quot;n&quot;]</code>，</li>
+<li><code>[0-9]</code> 匹配反括号之间的任何字符 例如：<code>&#39;ashen114&#39;.match(/[0-9]/g)</code>，得到<code>[&quot;1&quot;,&quot;1&quot;,&quot;4&quot;]</code>，</li>
+<li><code>[a-z]</code> 匹配任何从小写 a-z 的字符 例如：<code>&#39;ashen114&#39;.match(/[a-z]/g)</code>，得到<code>[&quot;a&quot;,&quot;s&quot;,&quot;h&quot;,&quot;e&quot;,&quot;n&quot;]</code>，</li>
+<li><code>[A-Z]</code> 匹配任何从大写 A-Z 的字符 例如：<code>&#39;CodingFun&#39;.match(/[a-z]/g)</code>，得到<code>[&quot;C&quot;,&quot;F&quot;]</code>，</li>
+<li><code>(x|y)</code> 查询由<code>|</code>分割的任何选项 例如：<code>&#39;red,yellow,red,green&#39;.match(/(red|green)/g)</code>，得到<code>[&quot;red&quot;, &quot;red&quot;, &quot;green&quot;]</code></li>
+<li><code>\w</code> 查找单词字符，单词字符包括：a-z、A-Z、0-9，以及下划线, 包含 _ (下划线) 字符。 例如:<code>&#39;a@b#1$2%&#39;.match(/\w/g)</code>，得到<code>[&quot;a&quot;, &quot;b&quot;, &quot;1&quot;, &quot;2&quot;]</code></li>
+</ul>
+<h4 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h4><ul>
+<li><code>\d</code> 查找数字 例如：<code>&#39;ashen114&#39;.match(/\d/g)</code>，得到  <code>[&quot;1&quot;, &quot;1&quot;, &quot;4&quot;]</code></li>
+<li><code>\s</code> 查找空白字符 例如：<code>&#39;a is a&#39;</code>，得到<code>[&quot;&quot;,&quot;&quot;]</code>表示存在两个空白字符</li>
+<li><code>\b</code> 匹配单词边界，查找对象是否处于边界，空白字符串，及非\w 的都可以作为边界 例如：<code>&#39;js sj@js jsj&#39;.match(/\bjs/g)</code>，得到<code>[&quot;js&quot;,&quot;js&quot;,&quot;js&quot;]</code>,其中第一个 js 为开头的 js，第二个是因为特殊符号@不包括\w 中，因为被列为边界，第三个 js 则是结尾的 jsj 的开头部分 js</li>
+<li><code>\B</code> 与<code>\b</code>相反 例如<code>&#39;js sj@js jsj&#39;.match(/\bj/g)</code>，得到<code>[&quot;j&quot;, &quot;j&quot;]</code>,其中第一个 j 是 sj@的 j，第二个 j 则是结尾的 j，因为他们不处于边界，而开头的 js，@js 何结尾的 jsj 的首字母都处于边界。</li>
+<li><code>\uxxxxx</code> 匹配 16 进制字符串 例如：<code>&#39;Welcome! Hello World&#39;.match(/\u0057/g)</code>，得到<code>[&quot;W&quot;,&quot;W&quot;]</code>,因为十六进制 0057 是 W</li>
+</ul>
+<h4 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h4><ul>
+<li><code>n+</code> 匹配任何包含至少一个 n 的字符串 例如：<code>&#39;i am aaa,hahaah&#39;.match(/a+/g)</code>,得到<code>[&quot;a&quot;,&quot;aaaa&quot;,&quot;a&quot;,&quot;aa&quot;]</code>，若是<code>/aa+/g</code>，则得到<code>[&quot;aaa&quot;,&quot;aa&quot;]</code></li>
+<li><code>n*</code> 匹配任何包含零个或者多个 n 的字符串 例如：<code>&#39;i am aaa,hahaah&#39;.match(/ha*/g)</code>,得到<code>[&quot;ha&quot;, &quot;haa&quot;, &quot;h&quot;]</code>，若是<code>/h*/g</code>，则得到<code>[&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;]</code></li>
+<li><code>n?</code> 匹配任何包含零个或者一个 n 的字符串 例如：<code>&#39;i am aaa,hahaah&#39;.match(/ha?/g)</code>,得到<code>[&quot;ha&quot;, &quot;ha&quot;, &quot;h&quot;]</code>，若是<code>/h?/g</code>，则得到<code>[&quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;, &quot;&quot;, &quot;h&quot;, &quot;&quot;]</code></li>
+</ul>
+<h4 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>过滤 p 标签</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'&lt;p class="test" style="height:60px;"&gt;&lt;/p&gt;'</span>;</span><br><span class="line">str.replace(<span class="regexp">/&lt;p[^&gt;]*? style\s?=\s?["']?([^"']*)["']?[^&gt;]*?&gt;/g</span>, <span class="string">"&lt;p&gt;"</span>); <span class="comment">// "&lt;p&gt;&lt;/p&gt;"</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>过滤 p 标签的 style</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">'&lt;p class="test" style="height:60px;"&gt;&lt;/p&gt;'</span>;</span><br><span class="line"><span class="keyword">let</span> reg = <span class="regexp">/&lt;p(\s([a-zA-Z0-9-]*)=\"([^=\"]*)\")*&gt;/gim</span>;</span><br><span class="line">str.replace(reg, <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> (s = s.replace(<span class="regexp">/\sstyle=\"[^\"]*\"/</span>, <span class="string">""</span>));</span><br><span class="line">&#125;); <span class="comment">// "&lt;p class="test"&gt;&lt;/p&gt;"</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-7"><a href="#研究对象-7" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> capitalize = cached(<span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.charAt(<span class="number">0</span>).toUpperCase() + str.slice(<span class="number">1</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt"></a>charAt</h3><blockquote>
+<p><code>str.charAt(index)</code> 可以根据 index 索引值找到当前字符串的值</p>
+</blockquote>
+<p>例如：<code>&#39;ashen&#39;.charAt(2)</code>得到<code>h</code></p>
+<h2 id="研究对象-8"><a href="#研究对象-8" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 正则表达式：匹配全部处于非边界的大写A-Z的字母，例如：_TEST.match(hyphenateRE)，则 得到TEST*/</span></span><br><span class="line"><span class="keyword">var</span> hyphenateRE = <span class="regexp">/\B([A-Z])/g</span>;</span><br><span class="line"><span class="keyword">var</span> hyphenate = cached(<span class="function"><span class="keyword">function</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 将匹配项转为"-小写"，其中$1表示每个匹配的字母，将每个匹配的转为-字母，再转为小写</span></span><br><span class="line">  <span class="keyword">return</span> str.replace(hyphenateRE, <span class="string">"-$1"</span>).toLowerCase();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>str.replace(hyphenateRE, &quot;-$1&quot;).toLowerCase();</code></p>
+<p>其中<code>$1</code>为每个匹配项</p>
+<h2 id="研究对象-9"><a href="#研究对象-9" class="headerlink" title="研究对象"></a>研究对象</h2><p><a href="https://www.jianshu.com/p/625c35d84a80" rel="external nofollow noopener noreferrer" target="_blank">参考文档</a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">polyfillBind</span>(<span class="params">fn, ctx</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">boundFn</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> l = <span class="built_in">arguments</span>.length;</span><br><span class="line">    <span class="keyword">return</span> l</span><br><span class="line">      ? l &gt; <span class="number">1</span></span><br><span class="line">        ? fn.apply(ctx, <span class="built_in">arguments</span>)</span><br><span class="line">        : fn.call(ctx, a)</span><br><span class="line">      : fn.call(ctx);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  boundFn._length = fn.length;</span><br><span class="line">  <span class="keyword">return</span> boundFn;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="apply-amp-amp-call"><a href="#apply-amp-amp-call" class="headerlink" title="apply &amp;&amp; call"></a>apply &amp;&amp; call</h3><p>学习链接：<a href="https://www.runoob.com/w3cnote/js-call-apply-bind.html" rel="external nofollow noopener noreferrer" target="_blank">https://www.runoob.com/w3cnote/js-call-apply-bind.html</a></p>
+<p>apply</p>
+<blockquote>
+<p>调用一个对象的方法，用另一个对象替换当前对象，可以继承另外一个对象的属性，它的语法是：<br><code>Function.apply(obj[, argArray]);</code></p>
+</blockquote>
+<p>call</p>
+<blockquote>
+<p>调用一个对象的方法，用另一个对象替换当前对象，可以继承另外一个对象的属性，它的语法是：<br><code>Function.call(obj[, param1[, param2[, [,...paramN]]]]);</code></p>
+</blockquote>
+<p>apply 与 call 类似，只是传参有点差异</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a, b, c</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a + b + c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">sub</span>(<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> a - b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(add.call(sub, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)); <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 因为call()方法改变了this的指向，使得sub可以调用add的方法，也就是用sub去执行add中的内容</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">People</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name;</span><br><span class="line">  <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, grade</span>) </span>&#123;</span><br><span class="line">  People.call(<span class="keyword">this</span>, name, age);</span><br><span class="line">  <span class="keyword">this</span>.grade = grade;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> student = <span class="keyword">new</span> Student(<span class="string">"小明"</span>, <span class="number">21</span>, <span class="string">"大三"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(student.name + student.age + student.grade); <span class="comment">//小明21大三</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// People.call(this, name, age);中的this代表的是Student，这也就是之前说的，使得Student可以调用People中的方法，因为People中有this.name = name;等语句，这样就将name和age属性创建到了Student中。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 总结一句话就是call()可以让括号里的对象来继承括号外函数的属性。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// People.apply(this, [name, age]); 等价于 People.apply(this, arguments);</span></span><br></pre></td></tr></table></figure>
+<p>apply()的其他用法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.max(<span class="number">12</span>, <span class="number">5</span>, <span class="number">7</span>); <span class="comment">// 得到12</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将Math.max接收的参数由(a,b,c)改为[a,b,c]</span></span><br><span class="line"><span class="built_in">Math</span>.max.apply(<span class="literal">null</span>, [<span class="number">12</span>, <span class="number">5</span>, <span class="number">7</span>]); <span class="comment">// 得到12</span></span><br></pre></td></tr></table></figure>
+<p>同理 Math.min 也可以</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line"><span class="built_in">Array</span>.prototype.push.apply(arr1, arr2); <span class="comment">//把arr2合并到arr1中,得到的arr1为[1,2,3,4,5,6]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr3 = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">let</span> arr4 = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];</span><br><span class="line">arr3.push.apply(arr3, arr4); <span class="comment">// 把arr4合并到arr3中,得到的arr3为[1,2,3,4,5,6]</span></span><br><span class="line"><span class="comment">// 或者使用[].push.apply(arr3,arr4)也可以达到同样的目的</span></span><br></pre></td></tr></table></figure>
+<h2 id="研究对象-10"><a href="#研究对象-10" class="headerlink" title="研究对象"></a>研究对象</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@function </span>将list转换为数组类型，允许从start开始截断数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params </span>list 需要转换的数组</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params </span>start 需要转换的开始位置，默认从0开始</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toArray</span>(<span class="params">list, start</span>) </span>&#123;</span><br><span class="line">  start = start || <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> i = list.length - start;</span><br><span class="line">  <span class="keyword">var</span> ret = <span class="keyword">new</span> <span class="built_in">Array</span>(i);</span><br><span class="line">  <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">    ret[i] = list[i + start];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Mix properties into target object.</span></span><br><span class="line"><span class="comment"> * 将属性混合到目标对象中</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@function </span>将_form插入到to对象中</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params </span>to 原对象，目标对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params </span>_from 待被插入到to对象的基本对象或数组</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">to, _from</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> _from) &#123;</span><br><span class="line">    to[key] = _from[key];</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> to;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Merge an Array of Objects into a single Object.</span></span><br><span class="line"><span class="comment"> * 将对象数组合并到单个对象</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@function </span>调用extend，将arr数组转换为对象</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@params <span class="variable">arr</span></span></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toObject</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> res = &#123;&#125;;</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (arr[i]) &#123;</span><br><span class="line">      extend(res, arr[i]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>处理数组，截断数组 <code>toArray(list,start)</code></li>
+<li>处理对象，将对象或者数组插入到对象中 <code>extend(to,_from)</code></li>
+<li>处理对象，将数组转换为对象 <code>toObject(arr)</code></li>
+</ol>
+<p>— <em>待更新-2020-02-28</em> —</p>
+
+
+      <div>
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-----本文结束 <i class="fa fa-code ashen-margin-lr-4"></i> 感谢阅读-----</div>
+    
+</div>
+      </div>
+       
+    </div>
+
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_wechatpay.jpg" alt="阿沈是也 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/ashen_alipay.jpg" alt="阿沈是也 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>阿沈是也
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/Vue/20200228-5414158b.html" title="Vue源码研读笔记">http://yoursite.com/Vue/20200228-5414158b.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/笔记/" rel="tag"><i class="fa fa-tag"></i> 笔记</a>
+              <a href="/tags/Vue源码/" rel="tag"><i class="fa fa-tag"></i> Vue源码</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/hexo博客/20200225-bf65917.html" rel="prev" title="博客及主题优化">
+      <i class="fa fa-chevron-left"></i> 博客及主题优化
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/项目记录/20200228-45ad4145.html" rel="next" title="Mimikyu开发笔记">
+      Mimikyu开发笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Vue"><span class="nav-number">1.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象"><span class="nav-number">1.1.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CommonJS"><span class="nav-number">1.1.1.</span> <span class="nav-text">CommonJS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AMD"><span class="nav-number">1.1.2.</span> <span class="nav-text">AMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CMD"><span class="nav-number">1.1.3.</span> <span class="nav-text">CMD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seajs"><span class="nav-number">1.1.4.</span> <span class="nav-text">seajs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number">1.1.5.</span> <span class="nav-text">结论</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-1"><span class="nav-number">1.2.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.2.1.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#symbol"><span class="nav-number">1.2.2.</span> <span class="nav-text">symbol</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-2"><span class="nav-number">1.3.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内置函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">内置函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Math-对象"><span class="nav-number">1.3.2.</span> <span class="nav-text">Math 对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-3"><span class="nav-number">1.4.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型判断"><span class="nav-number">1.5.</span> <span class="nav-text">类型判断</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型链"><span class="nav-number">1.6.</span> <span class="nav-text">原型链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类型转换"><span class="nav-number">1.7.</span> <span class="nav-text">类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON-stringfy"><span class="nav-number">1.7.1.</span> <span class="nav-text">JSON.stringfy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String-val"><span class="nav-number">1.7.2.</span> <span class="nav-text">String(val)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-4"><span class="nav-number">1.8.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#柯里化函数"><span class="nav-number">1.9.</span> <span class="nav-text">柯里化函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-5"><span class="nav-number">1.10.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包"><span class="nav-number">1.10.1.</span> <span class="nav-text">闭包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-6"><span class="nav-number">1.11.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式（待完善）"><span class="nav-number">1.11.1.</span> <span class="nav-text">正则表达式（待完善）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修饰符"><span class="nav-number">1.11.1.1.</span> <span class="nav-text">修饰符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表达式"><span class="nav-number">1.11.1.2.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#元字符"><span class="nav-number">1.11.1.3.</span> <span class="nav-text">元字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#量词"><span class="nav-number">1.11.1.4.</span> <span class="nav-text">量词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#练习"><span class="nav-number">1.11.1.5.</span> <span class="nav-text">练习</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-7"><span class="nav-number">1.12.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#charAt"><span class="nav-number">1.12.1.</span> <span class="nav-text">charAt</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-8"><span class="nav-number">1.13.</span> <span class="nav-text">研究对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-9"><span class="nav-number">1.14.</span> <span class="nav-text">研究对象</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apply-amp-amp-call"><span class="nav-number">1.14.1.</span> <span class="nav-text">apply &amp;&amp; call</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#研究对象-10"><span class="nav-number">1.15.</span> <span class="nav-text">研究对象</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="阿沈是也" src="/images/ashen_head.jpg">
+  <p class="site-author-name" itemprop="name">阿沈是也</p>
+  <div class="site-description" itemprop="description">程序员笔记</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ashen114" title="GitHub → https://github.com/ashen114" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:1215772764@qq.com" title="E-Mail → mailto:1215772764@qq.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">阿沈是也</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">92k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">1:24</span>
+</div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.7.1
+  </div>
+
+
+<!-- 在网页底部添加网站运行时间 -->
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+</div>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("02/25/2020 17:59:09");//此处修改你的建站时间或者网站上线时间
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "自建站已运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+
+        
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color="0,0,255" opacity="0.5" zindex="-1" count="99" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : true,
+      notify     : true,
+      appId      : 'z262SSq7M28bIiXvnwKOhrnD-gzGzoHsz',
+      appKey     : 'KedMI8KD71pGhDYdgR4KGQMm',
+      placeholder: "欢迎留言...",
+      avatar     : 'identicon',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : true,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","model":{"jsonPath":"live2d-widget-model-wanko"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"tagMode":false});</script></body>
+</html>
